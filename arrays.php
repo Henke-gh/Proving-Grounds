@@ -20,6 +20,17 @@ $player = [
     'gold' => 0,
 ];
 
+$combatLog = [];
+
+$itemEffectsMapping = [
+    'hitpoints' => 'hitpoints',
+    'damage' => 'damage',
+    'initiative' => 'initiative',
+    'absorb' => 'absorb',
+    'evasion' => 'evasion',
+    'hitpointsMax' => 'hitpointsMax',
+];
+
 $startingWeapons = [
     [
         'name' => 'Short Sword',
@@ -81,7 +92,7 @@ $vendorItems = [
         ],
         [
             'name' => 'Stone of Brawn',
-            'hitpoints' => 10,
+            'hitpointsMax' => 10,
             'cost' => 800,
         ],
     ],
@@ -177,6 +188,7 @@ $monsterTypes = [
         'hitpoints' => 1,
         'initiative' => 1,
         'chanceToHit' => 1,
+        'chanceToCrit' => 0,
         'evasion' => 0,
         'weapon' => [
             'name' => 'Bucket of Experience',

@@ -26,22 +26,23 @@ require_once __DIR__ . "/nav/header.php";
             <table class="shopItems">
                 <?php
                 $itemIndex = 0;
-                foreach ($vendorItems as $itemType => $items) : ?>
-                    <?php foreach ($items as $item) : ?>
+                foreach ($vendorItems as $itemType => $items) :
+                    foreach ($items as $item) :
+                ?>
                         <form method="post" action="shopCheckout.php">
                             <tr>
-                                <td><input type="hidden" name="getType" value="<?= $itemType; ?>">
-                                    <input type="hidden" name="getIndex" value="<?= $itemIndex; ?>">
+                                <td>
+                                    <input type="hidden" name="itemDetails[]" value="<?= htmlentities(json_encode($item)); ?>">
                                     <p><?= $item['name'] . " - " . $item['cost'] . " gold"; ?></p>
                                 </td>
-                                <!-- <td><button type="menu">Info</button></td> -->
                                 <td><button type="submit" name="buyItem">Buy</button></td>
                             </tr>
                         </form>
                 <?php
                         $itemIndex++;
                     endforeach;
-                endforeach; ?>
+                endforeach;
+                ?>
             </table>
             <form method="post" action="index.php">
                 <button type="submit" name="back">Back</button>

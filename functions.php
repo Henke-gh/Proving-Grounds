@@ -1,7 +1,5 @@
 <?php
 
-$combatLog = [];
-
 function combatInitiative()
 {
     global $monsterTypes, $monsterIndex, $initiative;
@@ -138,4 +136,19 @@ function doBattle($playerRetreat)
 
         $turnCounter++;
     } while ($_SESSION['hero']['hitpoints'] > $playerRetreat);
+}
+
+function applyItemEffects($item)
+{
+    global $itemEffectsMapping;
+
+    foreach ($item as $effectType => $value) {
+        if (isset($itemEffectsMapping[$effectType])) {
+            $heroStat = $itemEffectsMapping[$effectType];
+            $_SESSION['hero'][$heroStat] += $value;
+            if ($_SESSION['hero']['hitpoints'] > $_SESSION['hero']['hitpointsMax']) {
+                $_SESSION['hero']['hitpoints'] = $_SESSION['hero']['hitpointsMax'];
+            }
+        }
+    }
 }

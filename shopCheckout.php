@@ -2,26 +2,25 @@
 //ob_start();
 //require_once __DIR__ . "/arrays.php";
 require_once __DIR__ . "/nav/header.php";
-if (isset($_POST['buyItem'])) {
-    $itemIndex = $_POST['getIndex'];
-    $itemType = $_POST['getType'];
-    if ($_SESSION['hero']['gold'] < $vendorItems[$itemType][$itemIndex]['cost']) {
-        $_SESSION['message'] = "Sorry, you are short on gold..";
-        header('Location: shop.php');
-        //ob_end_flush();
-        //header('Location: https://henkes-portfolio.se/ProvingGrounds/shop.php');
-    } elseif ($itemType === 'healing') {
-        $_SESSION['hero']['hitpoints'] = $_SESSION['hero']['hitpoints'] + $vendorItems[$itemType][$itemIndex]['hitpoints'];
-        $_SESSION['hero']['gold'] = $_SESSION['hero']['gold'] - $vendorItems[$itemType][$itemIndex]['cost'];
-        if ($_SESSION['hero']['hitpoints'] > $_SESSION['hero']['hitpointsMax']) {
-            $_SESSION['hero']['hitpoints'] = $_SESSION['hero']['hitpointsMax'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['buyItem'])) {
+    // Check if 'itemDetails' is set in the POST data
+    if (isset($_POST['itemDetails']) && is_array($_POST['itemDetails'])) {
+        foreach ($_POST['itemDetails'] as $itemDetail) {
+            // Decode each item detail
+            $item = json_decode($itemDetail, true);
+
+            if ($_SESSION['hero']['gold'] >= $item['cost']) {
+                // Deduct the cost from the player's resources
+                $_SESSION['hero']['gold'] -= $item['cost'];
+                $_SESSION['message'] = "You bought " . $item['name'];
+                // Apply the item effects
+                applyItemEffects($item);
+            } else {
+                // Handle insufficient funds
+                $_SESSION['message'] = "I'm afraid your purse is too light..";
+            }
         }
-        $_SESSION['message'] = "You've bought " . $vendorItems[$itemType][$itemIndex]['name'];
-        header('Location: shop.php');
-        //ob_end_flush();
-        //header('Location: https://henkes-portfolio.se/ProvingGrounds/shop.php');
-    } else {
-        $_SESSION['message'] = "Sorry, not in stock.";
-        header('Location: shop.php');
     }
 }
+header('Location: shop.php');
+exit();

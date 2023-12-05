@@ -72,4 +72,7 @@ if (isset($_SESSION['hero'])) {
     </div>
 </main>
 <?php
+
+echo '<pre>';
+var_dump($_SESSION['hero']);
 require_once __DIR__ . "/nav/footer.php";
