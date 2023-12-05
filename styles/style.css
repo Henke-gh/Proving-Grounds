@@ -41,6 +41,10 @@ h3 {
   font-family: var(--fontRokkitt);
 }
 
+h4 {
+  font-family: var(--fontRokkitt);
+}
+
 header h1 {
   margin-top: 0;
   font-size: 7em;
@@ -126,6 +130,10 @@ ul {
 
 footer {
   margin-top: 10%;
+  text-align: center;
+  font-family: var(--fontRokkitt);
+  border-top: 2px solid var(--mustard);
+  padding: 5px;
 }
 
 .aboutPageContainer {
@@ -137,22 +145,39 @@ footer {
 
 .levelUpBox {
   margin-bottom: 2%;
+  font-family: var(--fontRokkitt);
+}
+
+.levelUpBox p {
+  font-size: 1.1em;
+}
+
+.heroMainWrap {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 }
 
 .levelUpBox,
+.myHeroWrap,
 .characterCreateWrap {
   background-color: var(--mustard);
   color: var(--darkBrown);
   padding: 2%;
   width: fit-content;
+  height: fit-content;
   border: 5px solid var(--lightMustard);
+}
+
+.charStats {
+  width: 250px;
 }
 
 .shopContainer {
   display: flex;
   flex-direction: row;
   align-content: center;
-  gap: 20px;
+  gap: 10px;
   background-color: var(--mustard);
   padding: 10px;
 }
@@ -257,6 +282,10 @@ footer {
   color: var(--darkBrown);
 }
 
+.graveyardImg {
+  margin-bottom: 1%;
+}
+
 @media only screen and (max-width: 900px) {
   header h1 {
     font-size: 5em;
@@ -278,11 +307,34 @@ footer {
   .shopContainer {
     flex-direction: column;
   }
+
+  .graveyardImg {
+    max-width: 90%;
+    height: auto;
+  }
+
+  .heroMainWrap {
+    display: block;
+  }
+
+  .charStats {
+    font-size: 1em;
+    width: 200px;
+    margin-top: 2%;
+  }
+
+  .aboutPageContainer {
+    max-width: 70%;
+  }
 }
 
 @media only screen and (max-width: 450px) {
   header h1 {
     font-size: 4em;
+  }
+
+  footer {
+    font-size: 0.8em;
   }
 
   .avatarSelect {
@@ -301,5 +353,9 @@ footer {
   .avatar img {
     max-width: 100%;
     height: auto;
+  }
+
+  .aboutPageContainer {
+    max-width: 80%;
   }
 }

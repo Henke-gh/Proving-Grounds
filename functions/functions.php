@@ -24,7 +24,7 @@ function combatInitiative()
 //this function relates to the combat initiative-function.
 function toHitValue()
 {
-    $toHit = rand(1, 10);
+    $toHit = rand(1, 20);
     return $toHit;
 }
 
@@ -93,10 +93,12 @@ function levelUp()
 
     if ($_SESSION['hero']['experience'] >= $levelUp[$_SESSION['hero']['level']]['cost']) {
         $_SESSION['hero']['level'] = $_SESSION['hero']['level'] + 1;
+        $_SESSION['hero']['initiative'] = $_SESSION['hero']['initiative'] + 1;
+        $_SESSION['hero']['evasion'] = $_SESSION['hero']['evasion'] + 1;
         $_SESSION['hero']['hitpointsMax'] = $_SESSION['hero']['hitpointsMax'] + 5;
         $_SESSION['hero']['hitpoints'] = $_SESSION['hero']['hitpointsMax'];
 
-        $_SESSION['levelUpMsg'] = "Congrats, you've leveled up! You gain 5 max HP.";
+        $_SESSION['levelUpMsg'] = "You have reached level " . $_SESSION['hero']['level'] . "!";
     }
 }
 

@@ -1,6 +1,6 @@
 <?php
-
-require_once __DIR__ . "/nav/header.php";
+require_once __DIR__ . "/functions/startSession.php";
+require_once __DIR__ . "/nav/header.html";
 ?>
 <main>
     <div class="aboutPageContainer">
@@ -22,4 +22,4 @@ require_once __DIR__ . "/nav/header.php";
 
 <?php
 
-require_once __DIR__ . "/nav/footer.php";
+require_once __DIR__ . "/nav/footer.html";

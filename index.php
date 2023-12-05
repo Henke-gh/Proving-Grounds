@@ -1,21 +1,14 @@
 <?php
-require_once __DIR__ . "/nav/header.php";
-
+require_once __DIR__ . "/functions/startSession.php";
 if (isset($_SESSION['hero'])) {
-    heroDeath();
-    levelUp();
+    header('Location: myHero.php');
 }
+require_once __DIR__ . "/nav/header.html";
 ?>
 <main>
-    <?php if (isset($_SESSION['levelUpMsg'])) : ?>
-        <div class="levelUpBox">
-            <h4><?= $_SESSION['levelUpMsg']; ?></h4>
-            <?php unset($_SESSION['levelUpMsg']); ?>
-        </div>
-    <?php endif; ?>
     <div class="characterCreateWrap">
         <?php if (!isset($_SESSION['hero'])) : ?>
-            <form class="characterCreate" method="post" action="initialiseHero.php">
+            <form class="characterCreate" method="post" action="/functions/initialiseHero.php">
                 <h2>Create your champion</h2>
                 <label id="heroName">Name your hero:</label>
                 <input class="heroNameInput" id="heroName" type="text" required name="heroName">
@@ -50,29 +43,8 @@ if (isset($_SESSION['hero'])) {
                 </select>
                 <button type="submit" name="createChar">Create</button>
             </form>
-        <?php else : ?>
-            <h3>Character Summary</h3>
-            <img class="heroAvatar" src="<?= $avatars[$_SESSION['hero']['avatar']]['url']; ?>">
-            <ul id="heroSummary">
-                <li>
-                    <h4><?= $_SESSION['hero']['name'] . " - Level: " . $_SESSION['hero']['level']; ?></h4>
-                </li>
-                <li><?= "HP: " . $_SESSION['hero']['hitpoints'] . "/" . $_SESSION['hero']['hitpointsMax']; ?></li>
-                <li><?= "Weapon: " . $_SESSION['hero']['weapon']['name']; ?></li>
-                <li><?= "Gold: " . $_SESSION['hero']['gold']; ?></li>
-                <li><?= "XP: " . $_SESSION['hero']['experience'] . "/" . $levelUp[$_SESSION['hero']['level']]['cost']; ?></li>
-            </ul>
-            <form method="post" action="combat.php">
-                <button type="submit" name="doCombat">Choose opponent</button>
-            </form>
-            <form method="post" action="shop.php">
-                <button type="submit" name="visitShop">Shop items</button>
-            </form>
         <?php endif; ?>
     </div>
 </main>
 <?php
-
-/* echo '<pre>';
-var_dump($_SESSION['hero']); */
-require_once __DIR__ . "/nav/footer.php";
+require_once __DIR__ . "/nav/footer.html";

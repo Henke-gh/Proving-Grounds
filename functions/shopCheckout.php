@@ -1,7 +1,6 @@
 <?php
 //ob_start();
-//require_once __DIR__ . "/arrays.php";
-require_once __DIR__ . "/nav/header.php";
+require_once __DIR__ . "/startSession.php";
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['buyItem'])) {
     // Check if 'itemDetails' is set in the POST data
     if (isset($_POST['itemDetails']) && is_array($_POST['itemDetails'])) {
@@ -22,5 +21,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['buyItem'])) {
         }
     }
 }
-header('Location: shop.php');
+header('Location: /../shop.php');
 exit();

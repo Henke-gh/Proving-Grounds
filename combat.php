@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__ . "/nav/header.php";
+require_once __DIR__ . "/functions/startSession.php";
+require_once __DIR__ . "/nav/header.html";
 
 if (isset($_POST['monster'], $_POST['retreatValue'])) {
     $monsterIndex = $_POST['monster'];
@@ -55,5 +56,5 @@ if (isset($_POST['monster'], $_POST['retreatValue'])) {
 </main>
 
 <?php
-require_once __DIR__ . "/nav/footer.php";
+require_once __DIR__ . "/nav/footer.html";
 ?>

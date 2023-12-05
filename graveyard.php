@@ -1,14 +1,15 @@
 <?php
-require_once __DIR__ . "/nav/header.php";
+require_once __DIR__ . "/functions/startSession.php";
+require_once __DIR__ . "/nav/header.html";
 ?>
 
 <main>
-    <h4>You have perished..</h4>
-    <img src="/assets/images/player_death_small.png">
-    <form action="endSession.php" method="post">
+    <h1>You have perished..</h1>
+    <img class="graveyardImg" src="/assets/images/player_death_small.png">
+    <form action="/functions/endSession.php" method="post">
         <button type="submit" name="endSession">New Game</button>
     </form>
 </main>
 
 <?php
-require_once __DIR__ . "/nav/footer.php";
+require_once __DIR__ . "/nav/footer.html";

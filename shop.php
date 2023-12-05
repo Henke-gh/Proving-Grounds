@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__ . "/nav/header.php";
+require_once __DIR__ . "/functions/startSession.php";
+require_once __DIR__ . "/nav/header.html";
 ?>
 
 <main>
@@ -7,12 +8,10 @@ require_once __DIR__ . "/nav/header.php";
     <div class="shopContainer">
         <div class="shop">
             <table class="shopItems">
-                <?php
-                $itemIndex = 0;
+                <?php $itemIndex = 0;
                 foreach ($vendorItems as $itemType => $items) :
-                    foreach ($items as $item) :
-                ?>
-                        <form method="post" action="shopCheckout.php">
+                    foreach ($items as $item) : ?>
+                        <form method="post" action="/functions/shopCheckout.php">
                             <tr>
                                 <td>
                                     <input type="hidden" name="itemDetails[]" value="<?= htmlentities(json_encode($item)); ?>">
@@ -21,8 +20,7 @@ require_once __DIR__ . "/nav/header.php";
                                 <td><button type="submit" name="buyItem">Buy</button></td>
                             </tr>
                         </form>
-                <?php
-                        $itemIndex++;
+                <?php $itemIndex++;
                     endforeach;
                 endforeach;
                 ?>
@@ -42,7 +40,7 @@ require_once __DIR__ . "/nav/header.php";
                 unset($_SESSION['message']); ?>
             </div>
             <div class="vendorBack shopBox">
-                <form method="post" action="index.php">
+                <form method="post" action="myHero.php">
                     <button type="submit" name="back">Back</button>
                 </form>
             </div>
@@ -51,4 +49,4 @@ require_once __DIR__ . "/nav/header.php";
 </main>
 
 <?php
-require_once __DIR__ . "/nav/footer.php";
+require_once __DIR__ . "/nav/footer.html";
