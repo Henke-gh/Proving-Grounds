@@ -18,7 +18,7 @@ if (isset($_SESSION['hero'])) {
             <form class="characterCreate" method="post" action="initialiseHero.php">
                 <h2>Create your champion</h2>
                 <label id="heroName">Name your hero:</label>
-                <input id="heroName" type="text" required name="heroName">
+                <input class="heroNameInput" id="heroName" type="text" required name="heroName">
                 <label id="heroGender">Select gender:</label>
                 <select id="heroGender" name="heroGender">
                     <option value="male">Male</option>
@@ -73,6 +73,6 @@ if (isset($_SESSION['hero'])) {
 </main>
 <?php
 
-echo '<pre>';
-var_dump($_SESSION['hero']);
+/* echo '<pre>';
+var_dump($_SESSION['hero']); */
 require_once __DIR__ . "/nav/footer.php";

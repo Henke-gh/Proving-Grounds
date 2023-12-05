@@ -3,26 +3,9 @@ require_once __DIR__ . "/nav/header.php";
 ?>
 
 <main>
-    <div class="playerShopInfo">
-        <ul>
-            <li>
-                <h4><?= $_SESSION['hero']['name']; ?></h4>
-                <h5><?= "Level: " . $_SESSION['hero']['level']; ?></h5>
-            </li>
-            <li><?= "HP: " . $_SESSION['hero']['hitpoints'] . "/" . $_SESSION['hero']['hitpointsMax']; ?></li>
-            <li><?= "Weapon: " . $_SESSION['hero']['weapon']['name']; ?></li>
-            <li><?= "Gold: " . $_SESSION['hero']['gold']; ?></li>
-        </ul>
-        <img class="heroAvatar" src="<?= $avatars[$_SESSION['hero']['avatar']]['url']; ?>">
-    </div>
+    <h1 class="shopHeader">Gourflarbfth's Magnificent Emporium</h1>
     <div class="shopContainer">
-        <img class="heroAvatar" src="/assets/images/goblin_vendor.png">
         <div class="shop">
-            <h3>Gourflarbfth's Exotic Goods</h3>
-            <?php if (isset($_SESSION['message'])) : ?>
-                <p><?= $_SESSION['message']; ?></p>
-            <?php endif;
-            unset($_SESSION['message']); ?>
             <table class="shopItems">
                 <?php
                 $itemIndex = 0;
@@ -44,9 +27,25 @@ require_once __DIR__ . "/nav/header.php";
                 endforeach;
                 ?>
             </table>
-            <form method="post" action="index.php">
-                <button type="submit" name="back">Back</button>
-            </form>
+            <div class="playerShopInfo">
+                <p><?= "Your gold: " . $_SESSION['hero']['gold']; ?></p>
+            </div>
+        </div>
+        <div class="vendorBackContainer shopBox">
+            <div class="vendorImg">
+                <img src="/assets/images/goblin_vendor02.png">
+                <?php if (isset($_SESSION['message'])) : ?>
+                    <p><?= $_SESSION['message']; ?></p>
+                <?php else : ?>
+                    <p>My selection is quite unrivaled!..</p>
+                <?php endif;
+                unset($_SESSION['message']); ?>
+            </div>
+            <div class="vendorBack shopBox">
+                <form method="post" action="index.php">
+                    <button type="submit" name="back">Back</button>
+                </form>
+            </div>
         </div>
     </div>
 </main>

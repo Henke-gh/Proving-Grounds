@@ -10,6 +10,7 @@
   --yellow: #dbd660;
   --slateBrown: #594d3a;
   --darkBrown: #2b2413;
+  --blue: #549ec3;
 }
 
 img {
@@ -31,6 +32,20 @@ header {
   font-family: var(--fontRokkitt);
 }
 
+h1 {
+  text-align: center;
+  font-family: var(--fontRokkitt);
+}
+
+h3 {
+  font-family: var(--fontRokkitt);
+}
+
+header h1 {
+  margin-top: 0;
+  font-size: 7em;
+}
+
 nav {
   display: flex;
   flex-direction: row;
@@ -50,10 +65,6 @@ a:hover {
   text-decoration: underline;
 }
 
-header h1 {
-  font-size: 7em;
-}
-
 header h2 {
   margin-top: -6%;
 }
@@ -68,6 +79,27 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+select {
+  font-size: 1.2em;
+  font-family: var(--fontRokkitt);
+  background-color: var(--lightMustard);
+}
+
+option {
+  font-family: var(--fontRokkitt);
+}
+
+label {
+  font-family: var(--fontRokkitt);
+  font-size: 1.2em;
+}
+
+.heroNameInput {
+  background-color: var(--lightMustard);
+  font-family: var(--fontRokkitt);
+  font-size: 1.2em;
 }
 
 form {
@@ -89,6 +121,7 @@ label {
 
 ul {
   list-style: none;
+  padding-left: 0;
 }
 
 footer {
@@ -107,34 +140,12 @@ footer {
 }
 
 .levelUpBox,
-.characterCreateWrap,
-.playerShopInfo {
+.characterCreateWrap {
   background-color: var(--mustard);
   color: var(--darkBrown);
   padding: 2%;
-  border-radius: 20px;
   width: fit-content;
-}
-
-.playerShopInfo {
-  display: flex;
-  flex-direction: row;
-  align-content: center;
-}
-
-.playerShopInfo > .heroAvatar,
-.shopContainer > .heroAvatar {
-  height: 100%;
-  width: auto;
-  align-self: center;
-}
-
-.playerShopInfo > .heroAvatar {
-  margin-left: 10%;
-}
-
-.shopContainer > .heroAvatar {
-  margin-right: 2%;
+  border: 5px solid var(--lightMustard);
 }
 
 .shopContainer {
@@ -142,14 +153,58 @@ footer {
   flex-direction: row;
   align-content: center;
   gap: 20px;
+  background-color: var(--mustard);
+  padding: 10px;
 }
 
 .shop {
+  display: flex;
+  flex-direction: column;
   background-color: var(--lightMustard);
   color: var(--darkBrown);
-  margin-top: 2%;
   padding: 2%;
-  border-radius: 20px;
+  width: fit-content;
+}
+
+.vendorImg {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  background-color: var(--lightMustard);
+  color: var(--darkBrown);
+  padding: 2%;
+  height: fit-content;
+  text-align: center;
+  font-family: var(--fontRokkitt);
+  font-style: italic;
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+.vendorBackContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.vendorBack {
+  background-color: var(--lightMustard);
+  margin-top: 5%;
+  width: fit-content;
+  padding: 5% 10% 5% 10%;
+}
+
+.playerShopInfo {
+  text-align: center;
+  padding: 15px;
+  background-color: var(--mustard);
+}
+
+.playerShopInfo p {
+  margin: 0;
+  font-family: var(--fontRokkitt);
+  font-weight: 600;
+  font-size: 1.2em;
 }
 
 .avatar {
@@ -190,16 +245,61 @@ footer {
   background-color: var(--mustard);
   color: var(--darkBrown);
   padding: 2%;
-  border-radius: 20px;
 }
 
 .combatLog {
   background-color: var(--lightMustard);
-  border-radius: 20px;
   padding: 10px;
 }
 
 .combatText {
   font-family: var(--fontRokkitt);
   color: var(--darkBrown);
+}
+
+@media only screen and (max-width: 900px) {
+  header h1 {
+    font-size: 5em;
+  }
+
+  .avatarSelect {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+  }
+
+  .avatar {
+    box-sizing: border-box;
+    padding: 5px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .shopContainer {
+    flex-direction: column;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  header h1 {
+    font-size: 4em;
+  }
+
+  .avatarSelect {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+  }
+
+  .avatar {
+    box-sizing: border-box;
+    padding: 5px;
+    width: 100%;
+    height: auto;
+  }
+
+  .avatar img {
+    max-width: 100%;
+    height: auto;
+  }
 }
