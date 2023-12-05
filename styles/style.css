@@ -1,0 +1,205 @@
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700&family=Rokkitt:ital,wght@0,200;0,400;0,600;0,800;1,200;1,600;1,800&display=swap");
+
+:root {
+  --fontArchivo: "Archivo", serif;
+  --fontRokkitt: "Rokkitt", sans-serif;
+  --beige: #debe90;
+  --lightBeige: #dec8b8;
+  --lightMustard: #dbce88;
+  --mustard: #dbb860;
+  --yellow: #dbd660;
+  --slateBrown: #594d3a;
+  --darkBrown: #2b2413;
+}
+
+img {
+  -webkit-tap-highlight-color: transparent; /* removes blue highlight on click */
+}
+
+body {
+  margin: 0;
+  font-family: var(--fontArchivo);
+  background-color: var(--darkBrown);
+  color: var(--lightMustard);
+}
+
+header {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-align: center;
+  background-color: var(--slateBrown);
+  font-family: var(--fontRokkitt);
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  border-top: 2px solid var(--mustard);
+  padding-top: 5px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 1.3em;
+  color: var(--lightMustard);
+}
+
+a:hover {
+  color: var(--mustard);
+  text-decoration: underline;
+}
+
+header h1 {
+  font-size: 7em;
+}
+
+header h2 {
+  margin-top: -6%;
+}
+
+form h2 {
+  font-family: var(--fontRokkitt);
+}
+
+main {
+  margin-top: 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+button {
+  cursor: pointer;
+  font-size: 1.2em;
+  font-family: var(--fontRokkitt);
+}
+
+label {
+  font-weight: 600;
+}
+
+ul {
+  list-style: none;
+}
+
+footer {
+  margin-top: 10%;
+}
+
+.aboutPageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 50%;
+}
+
+.levelUpBox {
+  margin-bottom: 2%;
+}
+
+.levelUpBox,
+.characterCreateWrap,
+.playerShopInfo {
+  background-color: var(--mustard);
+  color: var(--darkBrown);
+  padding: 2%;
+  border-radius: 20px;
+  width: fit-content;
+}
+
+.playerShopInfo {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+}
+
+.playerShopInfo > .heroAvatar,
+.shopContainer > .heroAvatar {
+  height: 100%;
+  width: auto;
+  align-self: center;
+}
+
+.playerShopInfo > .heroAvatar {
+  margin-left: 10%;
+}
+
+.shopContainer > .heroAvatar {
+  margin-right: 2%;
+}
+
+.shopContainer {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  gap: 20px;
+}
+
+.shop {
+  background-color: var(--lightMustard);
+  color: var(--darkBrown);
+  margin-top: 2%;
+  padding: 2%;
+  border-radius: 20px;
+}
+
+.avatar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.avatarSelect {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.avatarImage {
+  border-radius: 50%;
+  filter: grayscale(80%);
+  cursor: pointer;
+}
+
+.avatarImage:hover {
+  filter: grayscale(0%);
+}
+
+.avatarImage.selected {
+  filter: grayscale(0%); /* Remove greying out for the selected image */
+}
+
+.avatarImage.hover {
+  filter: grayscale(0%); /* Remove greying out on hover even if selected */
+}
+
+.heroAvatar {
+  border-radius: 50%;
+}
+
+.monsterSelect {
+  background-color: var(--mustard);
+  color: var(--darkBrown);
+  padding: 2%;
+  border-radius: 20px;
+}
+
+.combatLog {
+  background-color: var(--lightMustard);
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.combatText {
+  font-family: var(--fontRokkitt);
+  color: var(--darkBrown);
+}
