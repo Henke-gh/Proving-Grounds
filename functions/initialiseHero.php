@@ -8,6 +8,8 @@ if (isset($_POST['createChar'])) {
     $_SESSION['hero']['name'] = trim(htmlspecialchars($_POST['heroName'], ENT_QUOTES));
     $_SESSION['hero']['gender'] = $_POST['heroGender'];
     $_SESSION['hero']['avatar'] = (int) $_POST['heroAvatar'];
+    $_SESSION['hero']['lastStaminaUpdate'] = time();
+    $_SESSION['hero']['staminaRegenRate'] = 3;
     $_SESSION['hero']['weapon'] = $startingWeapons[$weaponIndex];
     $_SESSION['hero']['initiative'] = $_SESSION['hero']['initiative'] + $_SESSION['hero']['weapon']['initiative'];
 

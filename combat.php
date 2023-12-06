@@ -2,16 +2,30 @@
 require_once __DIR__ . "/functions/startSession.php";
 require_once __DIR__ . "/nav/header.html";
 
+checkRegenerationTime();
 if (isset($_POST['monster'], $_POST['retreatValue'])) {
     $monsterIndex = $_POST['monster'];
     $playerRetreat = $_POST['retreatValue'];
-    doBattle($playerRetreat);
+    if ($_SESSION['hero']['stamina'] <= 0) {
+        $_SESSION['staminaDepleted'] = "Your hero lacks the grit to press on. Maybe you should rest?";
+    } else {
+        doBattle($playerRetreat);
+    }
 }
 ?>
 
 <main>
     <img src="/assets/images/crossing_swords.png">
     <h3>Monster Duel</h3>
+    <?php if (isset($_SESSION['staminaDepleted'])) : ?>
+        <div class="monsterSelect">
+            <p><?= $_SESSION['staminaDepleted']; ?></p>
+            <form action="/myHero.php">
+                <button type="submit">Back</button>
+            </form>
+        </div>
+    <?php endif;
+    unset($_SESSION['staminaDepleted']); ?>
     <?php if (!isset($_POST['monster'])) : ?>
         <div class="monsterSelect">
             <form method="post">
@@ -20,7 +34,7 @@ if (isset($_POST['monster'], $_POST['retreatValue'])) {
                     <?php
                     $monsterIndex = 0;
                     foreach ($monsterTypes as $monster) : ?>
-                        <option value="<?= $monsterIndex; ?>"> <?= $monster['name']; ?></option>
+                        <option value="<?= $monsterIndex; ?>"><?= "[lv. " . $monster['level'] . "] " . $monster['name']; ?></option>
                     <?php
                         $monsterIndex++;
                     endforeach; ?>
@@ -41,7 +55,7 @@ if (isset($_POST['monster'], $_POST['retreatValue'])) {
                 <button type="submit">Back</button>
             </form>
         </div>
-    <?php else : ?>
+    <?php elseif (!empty($combatLog)) : ?>
         <h3><?= $_SESSION['hero']['name'] . " vs " . $monsterTypes[$monsterIndex]['name']; ?></h3>
         <div class="combatLog">
             <?php foreach ($combatLog as $line) : ?>

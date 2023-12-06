@@ -45,6 +45,7 @@ function toHitValueMonster()
 function playerAttack()
 {
     global $monsterTypes, $monsterIndex, $combatLog, $criticalDamage;
+
     $criticalDamage = $_SESSION['hero']['weapon']['damage'] * 1.5;
     $critChance = $_SESSION['hero']['chanceToCrit'];
     $toCrit = rand(1, 100);
@@ -64,6 +65,7 @@ function playerAttack()
 function monsterAttack()
 {
     global $monsterTypes, $monsterIndex, $combatLog, $criticalDamage;
+
     $criticalDamage = $monsterTypes[$monsterIndex]['weapon']['damage'] * 1.5;
     $critChance = $monsterTypes[$monsterIndex]['chanceToCrit'];
     $toCrit = rand(1, 100);
@@ -87,18 +89,82 @@ function heroDeath()
     }
 }
 
+//If player level is dividable by 2: Add +1 chance to hit, else add +1 Evasion.
+function checkToAddEvasionOrHitChance($level)
+{
+    if ($level % 2 == 0) {
+        $_SESSION['hero']['chanceToHit'] = $_SESSION['hero']['chanceToHit'] + 1;
+        array_push($_SESSION['levelUpMsg'], "You gain +1 Chance to Hit.");
+    } else {
+        $_SESSION['hero']['evasion'] = $_SESSION['hero']['evasion'] + 1;
+        array_push($_SESSION['levelUpMsg'], "You gain +1 Evasion.");
+    }
+}
+
 function levelUp()
 {
     global $levelUp;
 
     if ($_SESSION['hero']['experience'] >= $levelUp[$_SESSION['hero']['level']]['cost']) {
+        $_SESSION['levelUpMsg'] = [];
         $_SESSION['hero']['level'] = $_SESSION['hero']['level'] + 1;
-        $_SESSION['hero']['initiative'] = $_SESSION['hero']['initiative'] + 1;
-        $_SESSION['hero']['evasion'] = $_SESSION['hero']['evasion'] + 1;
+        $_SESSION['hero']['fame'] = $_SESSION['hero']['fame'] + 5;
         $_SESSION['hero']['hitpointsMax'] = $_SESSION['hero']['hitpointsMax'] + 5;
         $_SESSION['hero']['hitpoints'] = $_SESSION['hero']['hitpointsMax'];
+        array_push($_SESSION['levelUpMsg'], "You gain +5 Max HP.");
+        array_push($_SESSION['levelUpMsg'], "You gain +5 Fame.");
+        checkToAddEvasionOrHitChance($_SESSION['hero']['level']);
+    }
+}
 
-        $_SESSION['levelUpMsg'] = "You have reached level " . $_SESSION['hero']['level'] . "!";
+function xpReward()
+{
+    global $monsterTypes, $monsterIndex;
+
+    if ($_SESSION['hero']['level'] > $monsterTypes[$monsterIndex]['level']) {
+        $xpReward = floor($monsterTypes[$monsterIndex]['experience'] / 2);
+    } else {
+        $xpReward = $monsterTypes[$monsterIndex]['experience'];
+    }
+
+    return $xpReward;
+}
+
+function goldReward()
+{
+    global $monsterTypes, $monsterIndex;
+
+    if ($_SESSION['hero']['level'] > $monsterTypes[$monsterIndex]['level']) {
+        $goldReward = floor($monsterTypes[$monsterIndex]['goldDrop'] / 2);
+    } else {
+        $goldReward = $monsterTypes[$monsterIndex]['goldDrop'];
+    }
+
+    return $goldReward;
+}
+
+function regenerateStamina()
+{
+    $currentTime = time();
+    $lastStaminaUpdate = $_SESSION['hero']['lastStaminaUpdate'];
+    $elapsedTime = $currentTime - $lastStaminaUpdate;
+
+    // Calculate the amount of stamina to regenerate based on the regeneration rate
+    $staminaRegenRate = $_SESSION['hero']['staminaRegenRate'];
+    $regenAmount = floor($elapsedTime / 60) * $staminaRegenRate; // 1 unit per minute
+
+    // Update stamina, ensuring it doesn't exceed the maximum
+    $_SESSION['hero']['stamina'] = min($_SESSION['hero']['staminaMax'], $_SESSION['hero']['stamina'] + $regenAmount);
+
+    // Update the timestamp of the last stamina update
+    $_SESSION['hero']['lastStaminaUpdate'] = $currentTime;
+}
+
+function checkRegenerationTime()
+{
+
+    if (isset($_SESSION['hero']) && time() - $_SESSION['hero']['lastStaminaUpdate'] >= 180) {
+        regenerateStamina();
     }
 }
 
@@ -110,6 +176,7 @@ function doBattle($playerRetreat)
     $playerRetreat = $playerRetreat / 100 * $_SESSION['hero']['hitpointsMax'];
 
     do {
+
         if (combatInitiative() == true) {
             array_push($combatLog, "<strong>Turn " . $turnCounter . ": </strong>" . $initiative . " goes first!");
             playerAttack();
@@ -124,11 +191,13 @@ function doBattle($playerRetreat)
             }
         }
         if ($monsterTypes[$monsterIndex]['hitpoints'] <= 0) {
+            $xpReward = xpReward();
+            $goldReward = goldReward();
             array_push($combatLog, $monsterTypes[$monsterIndex]['name'] . " is slain!");
-            array_push($combatLog, "<strong>" . $_SESSION['hero']['name'] . " earned " . $monsterTypes[$monsterIndex]['experience'] . " xp!</strong>");
-            array_push($combatLog, "<strong>" . $_SESSION['hero']['name'] . " was rewarded " . $monsterTypes[$monsterIndex]['goldDrop'] . " gold!</strong>");
-            $_SESSION['hero']['experience'] = $_SESSION['hero']['experience'] + $monsterTypes[$monsterIndex]['experience'];
-            $_SESSION['hero']['gold'] = $_SESSION['hero']['gold'] + $monsterTypes[$monsterIndex]['goldDrop'];
+            array_push($combatLog, "<strong>" . $_SESSION['hero']['name'] . " earned " . $xpReward . " xp!</strong>");
+            array_push($combatLog, "<strong>" . $_SESSION['hero']['name'] . " was rewarded " . $goldReward . " gold!</strong>");
+            $_SESSION['hero']['experience'] = $_SESSION['hero']['experience'] + $xpReward;
+            $_SESSION['hero']['gold'] = $_SESSION['hero']['gold'] + $goldReward;
             break;
         } elseif ($_SESSION['hero']['hitpoints'] <= 0) {
             array_push($combatLog, $_SESSION['hero']['name'] . " is slain!");
@@ -137,6 +206,8 @@ function doBattle($playerRetreat)
         }
 
         $turnCounter++;
+        $staminaCost = $turnCounter;
+        $_SESSION['hero']['stamina'] -= $staminaCost;
     } while ($_SESSION['hero']['hitpoints'] > $playerRetreat);
 }
 

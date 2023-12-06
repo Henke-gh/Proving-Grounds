@@ -5,8 +5,11 @@ $player = [
     'gender' => 'Unknown',
     'avatar' => 0,
     'level' => 1,
+    'fame' => 0,
     'hitpointsMax' => 10,
     'hitpoints' => 10,
+    'stamina' => 100,
+    'staminaMax' => 100,
     'initiative' => 3,
     'chanceToHit' => 7,
     'chanceToCrit' => 10,
@@ -101,21 +104,8 @@ $vendorItems = [
 
 $monsterTypes = [
     [
-        'name' => 'Skeleton Knight',
-        'hitpoints' => 8,
-        'initiative' => 5,
-        'chanceToHit' => 4,
-        'chanceToCrit' => 5,
-        'evasion' => 1,
-        'weapon' => [
-            'name' => 'Long Sword',
-            'damage' => 4
-        ],
-        'experience' => 10,
-        'goldDrop' => 20,
-    ],
-    [
         'name' => 'Skeletal Priest',
+        'level' => 1,
         'hitpoints' => 6,
         'initiative' => 4,
         'chanceToHit' => 4,
@@ -125,53 +115,72 @@ $monsterTypes = [
             'name' => 'Cane',
             'damage' => 3
         ],
-        'experience' => 5,
+        'experience' => 10,
         'goldDrop' => 15,
     ],
     [
-        'name' => 'Scabby Ratman',
-        'hitpoints' => 7,
-        'initiative' => 9,
+        'name' => 'Skeleton Knight',
+        'level' => 2,
+        'hitpoints' => 9,
+        'initiative' => 5,
         'chanceToHit' => 6,
+        'chanceToCrit' => 5,
+        'evasion' => 1,
+        'weapon' => [
+            'name' => 'Long Sword',
+            'damage' => 4
+        ],
+        'experience' => 15,
+        'goldDrop' => 20,
+    ],
+    [
+        'name' => 'Scabby Ratman',
+        'level' => 2,
+        'hitpoints' => 8,
+        'initiative' => 9,
+        'chanceToHit' => 7,
         'chanceToCrit' => 7,
         'evasion' => 3,
         'weapon' => [
             'name' => 'Rusty Dagger',
-            'damage' => 2
+            'damage' => 3
         ],
-        'experience' => 10,
+        'experience' => 15,
         'goldDrop' => 20,
     ],
     [
         'name' => 'Young Troll',
+        'level' => 4,
         'hitpoints' => 16,
         'initiative' => 5,
-        'chanceToHit' => 5,
+        'chanceToHit' => 6,
         'chanceToCrit' => 4,
         'evasion' => 0,
         'weapon' => [
             'name' => 'Stone Axe',
-            'damage' => 4
+            'damage' => 10
         ],
-        'experience' => 15,
+        'experience' => 20,
         'goldDrop' => 25,
     ],
     [
         'name' => 'Legionnaire Lancer',
-        'hitpoints' => 12,
+        'level' => 6,
+        'hitpoints' => 14,
         'initiative' => 8,
-        'chanceToHit' => 6,
+        'chanceToHit' => 10,
         'chanceToCrit' => 6,
         'evasion' => 3,
         'weapon' => [
             'name' => 'War Javelin',
             'damage' => 6
         ],
-        'experience' => 20,
+        'experience' => 25,
         'goldDrop' => 30,
     ],
     [
         'name' => "Chthonian Nightmare",
+        'level' => 10,
         'hitpoints' => 85,
         'initiative' => 10,
         'chanceToHit' => 8,
@@ -186,6 +195,7 @@ $monsterTypes = [
     ],
     [
         'name' => 'XP Goblin',
+        'level' => 1,
         'hitpoints' => 1,
         'initiative' => 1,
         'chanceToHit' => 1,

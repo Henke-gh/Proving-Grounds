@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . "/functions/startSession.php";
 require_once __DIR__ . "/nav/header.html";
+checkRegenerationTime();
 ?>
 <main>
     <div class="aboutPageContainer">
