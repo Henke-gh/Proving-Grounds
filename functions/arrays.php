@@ -6,6 +6,8 @@ $player = [
     'avatar' => 0,
     'level' => 1,
     'fame' => 0,
+    'fameLevel' => 0,
+    'fameTitle' => 'Novice',
     'hitpointsMax' => 10,
     'hitpoints' => 10,
     'stamina' => 100,
@@ -195,7 +197,7 @@ $monsterTypes = [
     ],
     [
         'name' => 'XP Goblin',
-        'level' => 1,
+        'level' => 99,
         'hitpoints' => 1,
         'initiative' => 1,
         'chanceToHit' => 1,
@@ -207,6 +209,33 @@ $monsterTypes = [
         ],
         'experience' => 100,
         'goldDrop' => 300,
+    ],
+];
+
+$fameTitle = [
+    [
+        'fame' => 0,
+        'title' => 'Novice'
+    ],
+    [
+        'fame' => 10,
+        'title' => 'Adventuring Combatant'
+    ],
+    [
+        'fame' => 25,
+        'title' => 'Gladiator'
+    ],
+    [
+        'fame' => 50,
+        'title' => 'Ferocious Fighter'
+    ],
+    [
+        'fame' => 75,
+        'title' => 'Champion'
+    ],
+    [
+        'fame' => 100,
+        'title' => 'Anointed War-Bringer'
     ],
 ];
 

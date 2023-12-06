@@ -25,6 +25,7 @@ require_once __DIR__ . "/nav/header.html";
             <ul id="heroSummary">
                 <li>
                     <h4><?= $_SESSION['hero']['name'] . " - Level: " . $_SESSION['hero']['level']; ?></h4>
+                    <h4><?= $_SESSION['hero']['fameTitle']; ?></h4>
                 </li>
                 <li><?= "HP: " . $_SESSION['hero']['hitpoints'] . "/" . $_SESSION['hero']['hitpointsMax']; ?></li>
                 <li><?= "Grit: " . $_SESSION['hero']['stamina'] . "/" . $_SESSION['hero']['staminaMax']; ?></li>

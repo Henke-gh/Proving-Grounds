@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['buyItem'])) {
             if ($_SESSION['hero']['gold'] >= $item['cost']) {
                 // Deduct the cost from the player's resources
                 $_SESSION['hero']['gold'] -= $item['cost'];
-                $_SESSION['message'] = "You bought " . $item['name'];
+                $_SESSION['message'] = "You bought " . $item['name'] . ".";
                 // Apply the item effects
                 applyItemEffects($item);
             } else {

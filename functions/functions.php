@@ -103,12 +103,18 @@ function checkToAddEvasionOrHitChance($level)
 
 function levelUp()
 {
-    global $levelUp;
+    global $levelUp, $fameTitle;
+
+    $newFameLevel = $_SESSION['hero']['fameLevel'] + 1;
 
     if ($_SESSION['hero']['experience'] >= $levelUp[$_SESSION['hero']['level']]['cost']) {
         $_SESSION['levelUpMsg'] = [];
         $_SESSION['hero']['level'] = $_SESSION['hero']['level'] + 1;
         $_SESSION['hero']['fame'] = $_SESSION['hero']['fame'] + 5;
+        if ($_SESSION['hero']['fame'] >= $fameTitle[$newFameLevel]['fame']) {
+            $_SESSION['hero']['fameLevel'] = $_SESSION['hero']['fameLevel'] + 1;
+            $_SESSION['hero']['fameTitle'] = $fameTitle[$_SESSION['hero']['fameLevel']]['title'];
+        }
         $_SESSION['hero']['hitpointsMax'] = $_SESSION['hero']['hitpointsMax'] + 5;
         $_SESSION['hero']['hitpoints'] = $_SESSION['hero']['hitpointsMax'];
         array_push($_SESSION['levelUpMsg'], "You gain +5 Max HP.");
