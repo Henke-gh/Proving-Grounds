@@ -107,6 +107,12 @@ $vendorItems = [
     ],
     'armour' => [
         [
+            'name' => 'Mercenary Garb',
+            'absorb' => 1,
+            'evasion' => 1,
+            'cost' => 200,
+        ],
+        [
             'name' => 'Ranger Mantle',
             'absorb' => 0,
             'evasion' => 3,
@@ -129,6 +135,11 @@ $vendorItems = [
             'name' => 'Stone of Brawn',
             'hitpointsMax' => 10,
             'cost' => 800,
+        ],
+        [
+            'name' => 'Engraved Medal',
+            'chanceToHit' => 2,
+            'cost' => 650,
         ],
     ],
 ];
@@ -256,7 +267,7 @@ $monsterTypes = [
     ],
     [
         'name' => "Chthonian Nightmare",
-        'level' => 12,
+        'level' => 15,
         'hitpoints' => 85,
         'initiative' => 10,
         'chanceToHit' => 15,

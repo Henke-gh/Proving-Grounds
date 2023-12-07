@@ -261,7 +261,7 @@ function noNegativeStamina()
 
 function doBattle($playerRetreat)
 {
-    global $monsterTypes, $monsterIndex, $initiative, $combatLog;
+    global $monsterTypes, $monsterIndex, $initiative, $combatLog, $staminaCost;
     $turnCounter = 1;
 
     $playerRetreat = $playerRetreat / 100 * $_SESSION['hero']['hitpointsMax'];
@@ -336,6 +336,16 @@ function applyTrinketItemEffects()
 
             if (isset($_SESSION['hero']['hitpointsMax'])) {
                 $_SESSION['hero']['hitpointsMax'] += $maxHPincrease;
+                array_push($_SESSION['heroInventory'], $item['name']);
+            } /* else {
+                Add error-handling
+            } */
+        }
+        if ($category === "trinkets" && isset($item['chanceToHit'])) {
+            $incToHit = $item['chanceToHit'];
+
+            if (isset($_SESSION['hero']['chanceToHit'])) {
+                $_SESSION['hero']['chanceToHit'] += $incToHit;
                 array_push($_SESSION['heroInventory'], $item['name']);
             } /* else {
                 Add error-handling
@@ -418,6 +428,8 @@ function getDisplayKey($key)
             return 'Damage Reduction';
         case 'hitpointsMax':
             return 'Increase Max HP';
+        case 'chanceToHit':
+            return 'Chance to Hit';
         default:
             return $key;
     }
