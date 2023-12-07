@@ -104,6 +104,10 @@ label {
   font-size: 1.2em;
 }
 
+.bold {
+  font-weight: bold;
+}
+
 .heroNameInput {
   background-color: var(--lightMustard);
   font-family: var(--fontRokkitt);
@@ -191,6 +195,16 @@ footer {
 .shopGridBox {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  gap: 5px;
+}
+
+.shopGridItem {
+  background-color: var(--lightMustard);
+  padding-left: 5px;
+}
+
+.shopGridItem:nth-child(1) {
+  padding-left: 15px;
 }
 
 .shopItems {

@@ -47,6 +47,10 @@ function playerAttack()
     global $monsterTypes, $monsterIndex, $combatLog, $criticalDamage;
 
     $criticalDamage = $_SESSION['hero']['weapon']['damage'] * 1.5;
+    $damage = $_SESSION['hero']['weapon']['damage'];
+    if ($damage < 0) {
+        $damage = 0;
+    }
     $critChance = $_SESSION['hero']['chanceToCrit'];
     $toCrit = rand(1, 100);
 
@@ -57,8 +61,8 @@ function playerAttack()
         array_push($combatLog, $_SESSION['hero']['name'] . " delivers a crushing blow to " . $monsterTypes[$monsterIndex]['name'] . " for<strong> " . floor($criticalDamage) . " damage!</strong>");
         $monsterTypes[$monsterIndex]['hitpoints'] = $monsterTypes[$monsterIndex]['hitpoints'] - floor($criticalDamage);
     } else {
-        array_push($combatLog, $_SESSION['hero']['name'] . " hits " . $monsterTypes[$monsterIndex]['name'] . " for " . $_SESSION['hero']['weapon']['damage'] . " damage!");
-        $monsterTypes[$monsterIndex]['hitpoints'] = $monsterTypes[$monsterIndex]['hitpoints'] - $_SESSION['hero']['weapon']['damage'];
+        array_push($combatLog, $_SESSION['hero']['name'] . " hits " . $monsterTypes[$monsterIndex]['name'] . " for " . $damage . " damage!");
+        $monsterTypes[$monsterIndex]['hitpoints'] = $monsterTypes[$monsterIndex]['hitpoints'] - $damage;
     }
 };
 
@@ -67,6 +71,11 @@ function monsterAttack()
     global $monsterTypes, $monsterIndex, $combatLog, $criticalDamage;
 
     $criticalDamage = $monsterTypes[$monsterIndex]['weapon']['damage'] * 1.5;
+    $damage = $monsterTypes[$monsterIndex]['weapon']['damage'] - $_SESSION['hero']['absorb'];
+    //negative damage values causes that which is hit to gain HP and it's all sorts of bad...
+    if ($damage < 0) {
+        $damage = 0;
+    }
     $critChance = $monsterTypes[$monsterIndex]['chanceToCrit'];
     $toCrit = rand(1, 100);
 
@@ -77,8 +86,8 @@ function monsterAttack()
         array_push($combatLog, $monsterTypes[$monsterIndex]['name'] . " strikes a murderous blow to " . $_SESSION['hero']['name'] . " for <strong>" . floor($criticalDamage) . " damage!</strong>");
         $_SESSION['hero']['hitpoints'] = $_SESSION['hero']['hitpoints'] - floor($criticalDamage);
     } else {
-        array_push($combatLog, $monsterTypes[$monsterIndex]['name'] . " hits " . $_SESSION['hero']['name'] . " for " . $monsterTypes[$monsterIndex]['weapon']['damage'] . " damage!");
-        $_SESSION['hero']['hitpoints'] = $_SESSION['hero']['hitpoints'] - $monsterTypes[$monsterIndex]['weapon']['damage'];
+        array_push($combatLog, $monsterTypes[$monsterIndex]['name'] . " hits " . $_SESSION['hero']['name'] . " for " . $damage . " damage!");
+        $_SESSION['hero']['hitpoints'] = $_SESSION['hero']['hitpoints'] - $damage;
     }
 }
 
@@ -217,21 +226,109 @@ function doBattle($playerRetreat)
     } while ($_SESSION['hero']['hitpoints'] > $playerRetreat);
 }
 
-function applyItemEffects($item)
+//applies the effect of key => healing items bought in the store.
+function applyHealingItemEffects()
 {
-    global $itemEffectsMapping;
-
-    foreach ($item as $effectType => $value) {
-        if (isset($itemEffectsMapping[$effectType])) {
-            $heroStat = $itemEffectsMapping[$effectType];
-            $_SESSION['hero'][$heroStat] += $value;
-            if ($_SESSION['hero']['hitpoints'] > $_SESSION['hero']['hitpointsMax']) {
-                $_SESSION['hero']['hitpoints'] = $_SESSION['hero']['hitpointsMax'];
-            }
+    global $itemShopArray;
+    foreach ($itemShopArray as $valueType) {
+        $_SESSION['hero']['hitpoints'] += $valueType['hitpoints'];
+        if ($_SESSION['hero']['hitpoints'] > $_SESSION['hero']['hitpointsMax']) {
+            $_SESSION['hero']['hitpoints'] = $_SESSION['hero']['hitpointsMax'];
         }
     }
 }
 
+//applies Trinket item effects, also ensures the player can only buy one of each.
+function applyTrinketItemEffects()
+{
+    global $itemShopArray;
+    foreach ($itemShopArray as $category => $item) {
+        if ($category === "trinkets" && isset($item['evasion'])) {
+            $evasionIncrease = $item['evasion'];
+
+            if (isset($_SESSION['hero']['evasion'])) {
+                $_SESSION['hero']['evasion'] += $evasionIncrease;
+                array_push($_SESSION['heroInventory'], $item['name']);
+            } /* else {
+                Add error-handling
+            } */
+        }
+        if ($category === "trinkets" && isset($item['hitpointsMax'])) {
+            $maxHPincrease = $item['hitpointsMax'];
+
+            if (isset($_SESSION['hero']['hitpointsMax'])) {
+                $_SESSION['hero']['hitpointsMax'] += $maxHPincrease;
+                array_push($_SESSION['heroInventory'], $item['name']);
+            } /* else {
+                Add error-handling
+            } */
+        }
+    }
+}
+
+//subtracts added weapon bonuses from the player, used when switching weapons.
+function removeWeaponBonuses()
+{
+    $_SESSION['hero']['initiative'] -= $_SESSION['hero']['weapon']['initiative'];
+    $_SESSION['hero']['evasion'] -= $_SESSION['hero']['weapon']['evasion'];
+}
+
+//adds weapon bonuses to the player, used when switching weapons.
+function addWeaponBonuses()
+{
+    $_SESSION['hero']['initiative'] += $_SESSION['hero']['weapon']['initiative'];
+    $_SESSION['hero']['evasion'] += $_SESSION['hero']['weapon']['evasion'];
+}
+
+//removes armour bonuses from the player, used when switching armour.
+function removeArmourBonuses()
+{
+    $_SESSION['hero']['evasion'] -= $_SESSION['hero']['armour']['evasion'];
+    $_SESSION['hero']['absorb'] -= $_SESSION['hero']['armour']['absorb'];
+}
+//adds armour bonuses to the player, used when switching armour.
+function addArmourBonuses()
+{
+    $_SESSION['hero']['evasion'] += $_SESSION['hero']['armour']['evasion'];
+    $_SESSION['hero']['absorb'] += $_SESSION['hero']['armour']['absorb'];
+}
+
+//applies new weapon stats to player, and updates total (base + weapon) values accordingly.
+function applyWeaponItemEffects()
+{
+    global $itemShopArray;
+    foreach ($itemShopArray as $category => $item) {
+        if ($category === "weapons") {
+            removeWeaponBonuses();
+            $_SESSION['hero']['weapon']['name'] = $item['name'];
+            $_SESSION['hero']['weapon']['damage'] = $item['damage'];
+            $_SESSION['hero']['weapon']['initiative'] = $item['initiative'];
+            if (isset($item['evasion'])) {
+                $_SESSION['hero']['weapon']['evasion'] = $item['evasion'];
+            } else {
+                $_SESSION['hero']['weapon']['evasion'] = $item['evasion'];
+            }
+            addWeaponBonuses();
+        }
+    }
+}
+
+function applyArmourItemEffects()
+{
+    global $itemShopArray;
+    foreach ($itemShopArray as $category => $item) {
+        if ($category === "armour") {
+            removeArmourBonuses();
+            $_SESSION['hero']['armour']['name'] = $item['name'];
+            $_SESSION['hero']['armour']['evasion'] = $item['evasion'];
+            $_SESSION['hero']['armour']['absorb'] = $item['absorb'];
+            addArmourBonuses();
+        }
+    }
+}
+
+//Changes displayed Key-value in the Shop (foreach-loop),
+//where array-key does not match the in-game description.
 function getDisplayKey($key)
 {
     switch ($key) {

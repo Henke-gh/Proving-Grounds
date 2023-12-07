@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . "/arrays.php";
+require_once __DIR__ . "/functions.php";
 session_start();
 
 if (isset($_POST['createChar'])) {
@@ -11,7 +12,9 @@ if (isset($_POST['createChar'])) {
     $_SESSION['hero']['lastStaminaUpdate'] = time();
     $_SESSION['hero']['staminaRegenRate'] = 3;
     $_SESSION['hero']['weapon'] = $startingWeapons[$weaponIndex];
-    $_SESSION['hero']['initiative'] = $_SESSION['hero']['initiative'] + $_SESSION['hero']['weapon']['initiative'];
+    addWeaponBonuses();
+
+    $_SESSION['heroInventory'] = $playerInventory;
 
     header('Location: /../myHero.php');
 }

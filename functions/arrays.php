@@ -20,22 +20,21 @@ $player = [
     'weapon' => [
         'name' => 'Wooden Sword',
         'damage' => 2,
-        'initiative' => 1
+        'initiative' => 1,
+        'evasion' => 0,
+    ],
+    'armour' => [
+        'name' => 'Tunic',
+        'evasion' => 0,
+        'absorb' => 0
     ],
     'experience' => 0,
     'gold' => 0,
 ];
 
-$combatLog = [];
+$playerInventory = [];
 
-$itemEffectsMapping = [
-    'hitpoints' => 'hitpoints',
-    'damage' => 'damage',
-    'initiative' => 'initiative',
-    'absorb' => 'absorb',
-    'evasion' => 'evasion',
-    'hitpointsMax' => 'hitpointsMax',
-];
+$combatLog = [];
 
 $startingWeapons = [
     [
@@ -97,16 +96,16 @@ $vendorItems = [
     ],
     'armour' => [
         [
+            'name' => 'Ranger Mantle',
+            'absorb' => 0,
+            'evasion' => 3,
+            'cost' => 400,
+        ],
+        [
             'name' => 'Gladiator Breastplate',
             'absorb' => 3,
             'evasion' => -2,
             'cost' => 550,
-        ],
-        [
-            'name' => 'Ranger Mantle',
-            'absorb' => 0,
-            'evasion' => 5,
-            'cost' => 500,
         ],
     ],
     'trinkets' => [
@@ -298,6 +297,26 @@ $levelUp = [
     [
         'level' => 10,
         'cost' => 1000
+    ],
+    [
+        'level' => 11,
+        'cost' => 1250
+    ],
+    [
+        'level' => 12,
+        'cost' => 1500
+    ],
+    [
+        'level' => 13,
+        'cost' => 1750
+    ],
+    [
+        'level' => 14,
+        'cost' => 2500
+    ],
+    [
+        'level' => 15,
+        'cost' => 3500
     ],
 ];
 

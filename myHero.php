@@ -27,12 +27,11 @@ require_once __DIR__ . "/nav/header.html";
                     <h4><?= $_SESSION['hero']['name'] . " - Level: " . $_SESSION['hero']['level']; ?></h4>
                     <h4><?= $_SESSION['hero']['fameTitle']; ?></h4>
                 </li>
-                <li><?= "HP: " . $_SESSION['hero']['hitpoints'] . "/" . $_SESSION['hero']['hitpointsMax']; ?></li>
-                <li><?= "Grit: " . $_SESSION['hero']['stamina'] . "/" . $_SESSION['hero']['staminaMax']; ?></li>
-                <li><?= "Fame: " . $_SESSION['hero']['fame']; ?></li>
-                <li><?= "Weapon: " . $_SESSION['hero']['weapon']['name']; ?></li>
-                <li><?= "Gold: " . $_SESSION['hero']['gold']; ?></li>
-                <li><?= "XP: " . $_SESSION['hero']['experience'] . "/" . $levelUp[$_SESSION['hero']['level']]['cost']; ?></li>
+                <li><span class="bold">HP: </span><?= $_SESSION['hero']['hitpoints'] . "/" . $_SESSION['hero']['hitpointsMax']; ?></li>
+                <li><span class="bold">Grit: </span><?= $_SESSION['hero']['stamina'] . "/" . $_SESSION['hero']['staminaMax']; ?></li>
+                <li><span class="bold">Fame: </span><?= $_SESSION['hero']['fame']; ?></li>
+                <li><span class="bold">Gold: </span><?= $_SESSION['hero']['gold']; ?></li>
+                <li><span class="bold">XP: </span><?= $_SESSION['hero']['experience'] . "/" . $levelUp[$_SESSION['hero']['level']]['cost']; ?></li>
             </ul>
             <form method="post" action="combat.php">
                 <button type="submit" name="doCombat">Choose opponent</button>
@@ -42,13 +41,27 @@ require_once __DIR__ . "/nav/header.html";
             </form>
         </div>
         <div class="myHeroWrap charStats">
+            <h3>Inventory</h3>
+            <ul id="heroSummary">
+                <h4>Equipment</h4>
+                <li><span class="bold">Weapon: </span><?= $_SESSION['hero']['weapon']['name']; ?></li>
+                <li><span class="bold">Armour: </span><?= $_SESSION['hero']['armour']['name']; ?></li>
+                <?php
+                if (!empty($_SESSION['heroInventory'])) : ?>
+                    <h4>Magical Objects</h4>
+                    <?php foreach ($_SESSION['heroInventory'] as $item) : ?>
+                        <li><span class="bold">Trinket: </span><?= $item; ?></li>
+                <?php endforeach;
+                endif; ?>
+            </ul>
             <h3>Character Stats</h3>
             <ul id="heroSummary">
-                <li><?= "Initiative: " . $_SESSION['hero']['initiative']; ?></li>
-                <li><?= "Chance to Hit: " . $_SESSION['hero']['chanceToHit']; ?></li>
-                <li><?= "Critical Strike Chance: " . $_SESSION['hero']['chanceToCrit'] . "%"; ?></li>
-                <li><?= "Evasion: " . $_SESSION['hero']['evasion']; ?></li>
-                <li><?= "Damage Reduction: " . $_SESSION['hero']['absorb']; ?></li>
+                <li><span class="bold">Damage: </span><?= $_SESSION['hero']['weapon']['damage']; ?></li>
+                <li><span class="bold">Initiative: </span><?= $_SESSION['hero']['initiative']; ?></li>
+                <li><span class="bold">Chance to Hit: </span><?= $_SESSION['hero']['chanceToHit']; ?></li>
+                <li><span class="bold">Critical Strike Chance: </span><?= $_SESSION['hero']['chanceToCrit'] . "%"; ?></li>
+                <li><span class="bold">Evasion: </span><?= $_SESSION['hero']['evasion']; ?></li>
+                <li><span class="bold">Damage Reduction: </span><?= $_SESSION['hero']['absorb']; ?></li>
             </ul>
         </div>
     </div>

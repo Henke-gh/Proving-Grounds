@@ -27,7 +27,7 @@ checkRegenerationTime();
                                 <form method="post" action="/functions/shopCheckout.php">
                                     <ul class="items">
                                         <li class="item">
-                                            <input type="hidden" name="itemDetails[]" value="<?= htmlentities(json_encode($item)); ?>">
+                                            <input type="hidden" name="itemDetails[]" value="<?= htmlentities(json_encode($itemArray = [$category => $item])); ?>">
                                             <h3><?= $item['name']; ?></h3>
                                             <?php foreach ($item as $key => $value) : ?>
                                                 <?php
