@@ -49,7 +49,7 @@ $startingWeapons = [
         'initiative' => 0
     ],
     [
-        'name' => 'Long Staff',
+        'name' => 'Wooden Staff',
         'damage' => 3,
         'initiative' => 4
     ]
@@ -70,10 +70,29 @@ $vendorItems = [
     ],
     'weapons' => [
         [
-            'name' => 'War Axe',
+            'name' => 'Blade-Staff',
             'damage' => 6,
-            'initiative' => 3,
-            'cost' => 35,
+            'initiative' => 4,
+            'cost' => 350,
+        ],
+        [
+            'name' => 'Twin Daggers',
+            'damage' => 5,
+            'evasion' => 4,
+            'initiative' => 4,
+            'cost' => 300,
+        ],
+        [
+            'name' => 'War Axe',
+            'damage' => 8,
+            'initiative' => 1,
+            'cost' => 450,
+        ],
+        [
+            'name' => 'Bastard Sword',
+            'damage' => 10,
+            'initiative' => 5,
+            'cost' => 1200,
         ],
     ],
     'armour' => [

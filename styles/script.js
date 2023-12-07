@@ -28,14 +28,21 @@ avatarImages.forEach((avatarImage) => {
   });
 });
 
-/* document.addEventListener("DOMContentLoaded", function () {
-  // Check if there's a fragment identifier in the URL
-  const fragment = window.location.hash;
-  if (fragment) {
-    // Scroll to the element with the corresponding ID
-    const targetElement = document.querySelector(fragment);
-    if (targetElement) {
-      targetElement.scrollIntoView({ behavior: "smooth" });
-    }
+document.addEventListener("DOMContentLoaded", function () {
+  // Show the Healing category by default
+  showCategory("healing");
+});
+
+function showCategory(category) {
+  // Hide all categories
+  var categories = document.querySelectorAll(".category");
+  categories.forEach(function (cat) {
+    cat.style.display = "none";
+  });
+
+  // Show the selected category
+  var selectedCategory = document.getElementById(category);
+  if (selectedCategory) {
+    selectedCategory.style.display = "block";
   }
-}); */
+}

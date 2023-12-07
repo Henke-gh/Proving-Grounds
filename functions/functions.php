@@ -231,3 +231,19 @@ function applyItemEffects($item)
         }
     }
 }
+
+function getDisplayKey($key)
+{
+    switch ($key) {
+        case 'cost':
+            return 'Gold';
+        case 'hitpoints':
+            return 'Gain HP';
+        case 'absorb':
+            return 'Damage Reduction';
+        case 'hitpointsMax':
+            return 'Increase Max HP';
+        default:
+            return $key;
+    }
+}

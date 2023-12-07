@@ -37,6 +37,10 @@ h1 {
   font-family: var(--fontRokkitt);
 }
 
+h2 {
+  font-family: var(--fontRokkitt);
+}
+
 h3 {
   font-family: var(--fontRokkitt);
 }
@@ -176,26 +180,51 @@ footer {
 .shopContainer {
   display: flex;
   flex-direction: row;
-  align-content: center;
   gap: 10px;
-  background-color: var(--mustard);
-  padding: 10px;
+  padding-top: 10px;
 }
 
-.shop {
-  display: flex;
-  flex-direction: column;
-  background-color: var(--lightMustard);
+.shopContainer form {
+  align-items: normal;
+}
+
+.shopGridBox {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.shopItems {
+  background-color: var(--mustard);
+  border: 5px solid var(--lightMustard);
   color: var(--darkBrown);
   padding: 2%;
-  width: fit-content;
+  height: fit-content;
+}
+
+.category {
+  display: none;
+  text-align: left;
+}
+
+.category h2 {
+  text-align: center;
+}
+
+.items {
+  list-style: none;
+  margin-left: 0;
+}
+
+.item {
+  text-align: left;
 }
 
 .vendorImg {
   display: flex;
   flex-direction: column;
   align-content: center;
-  background-color: var(--lightMustard);
+  background-color: var(--mustard);
+  border: 5px solid var(--lightMustard);
   color: var(--darkBrown);
   padding: 2%;
   height: fit-content;
@@ -206,6 +235,11 @@ footer {
   font-weight: 600;
 }
 
+.vendorImg button {
+  width: fit-content;
+  margin: 0 auto;
+}
+
 .vendorBackContainer {
   display: flex;
   flex-direction: column;
@@ -213,7 +247,7 @@ footer {
 }
 
 .vendorBack {
-  background-color: var(--lightMustard);
+  background-color: var(--slateBrown);
   margin-top: 5%;
   width: fit-content;
   padding: 5% 10% 5% 10%;
@@ -221,15 +255,22 @@ footer {
 
 .playerShopInfo {
   text-align: center;
-  padding: 15px;
+  margin-top: 10px;
+  padding: 5px;
   background-color: var(--mustard);
+  border-left: 10px solid var(--lightMustard);
+  color: var(--darkBrown);
+}
+
+.playerShopInfo h3 {
+  margin: 0;
 }
 
 .playerShopInfo p {
   margin: 0;
   font-family: var(--fontRokkitt);
-  font-weight: 600;
-  font-size: 1.2em;
+  font-weight: 400;
+  font-size: 1em;
 }
 
 .avatar {
