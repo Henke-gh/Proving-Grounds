@@ -10,7 +10,9 @@ if (isset($_POST['createChar'])) {
     $_SESSION['hero']['gender'] = $_POST['heroGender'];
     $_SESSION['hero']['avatar'] = (int) $_POST['heroAvatar'];
     $_SESSION['hero']['lastStaminaUpdate'] = time();
-    $_SESSION['hero']['staminaRegenRate'] = 3;
+    $_SESSION['hero']['staminaRegenRate'] = 5;
+    $_SESSION['hero']['lastHPupdate'] = time();
+    $_SESSION['hero']['hpRegenRate'] = 2;
     $_SESSION['hero']['weapon'] = $startingWeapons[$weaponIndex];
     addWeaponBonuses();
 

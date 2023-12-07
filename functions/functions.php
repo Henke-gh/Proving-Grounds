@@ -54,12 +54,12 @@ function playerAttack()
     $critChance = $_SESSION['hero']['chanceToCrit'];
     $toCrit = rand(1, 100);
 
-    array_push($combatLog, $_SESSION['hero']['name'] . " charges with their " . $_SESSION['hero']['weapon']['name'] . "!");
-    if ($_SESSION['hero']['chanceToHit'] < toHitValuePlayer()) {
-        array_push($combatLog, $_SESSION['hero']['name'] . " missed..");
-    } elseif ($critChance >= $toCrit) {
+    array_push($combatLog, $_SESSION['hero']['name'] . " charges with " . getPlayerGender() . " " . $_SESSION['hero']['weapon']['name'] . "!");
+    if ($critChance >= $toCrit) {
         array_push($combatLog, $_SESSION['hero']['name'] . " delivers a crushing blow to " . $monsterTypes[$monsterIndex]['name'] . " for<strong> " . floor($criticalDamage) . " damage!</strong>");
         $monsterTypes[$monsterIndex]['hitpoints'] = $monsterTypes[$monsterIndex]['hitpoints'] - floor($criticalDamage);
+    } elseif ($_SESSION['hero']['chanceToHit'] < toHitValuePlayer()) {
+        array_push($combatLog, $_SESSION['hero']['name'] . " missed..");
     } else {
         array_push($combatLog, $_SESSION['hero']['name'] . " hits " . $monsterTypes[$monsterIndex]['name'] . " for " . $damage . " damage!");
         $monsterTypes[$monsterIndex]['hitpoints'] = $monsterTypes[$monsterIndex]['hitpoints'] - $damage;
@@ -80,11 +80,11 @@ function monsterAttack()
     $toCrit = rand(1, 100);
 
     array_push($combatLog, $monsterTypes[$monsterIndex]['name'] . " swings its " . $monsterTypes[$monsterIndex]['weapon']['name'] . "!");
-    if ($monsterTypes[$monsterIndex]['chanceToHit'] < toHitValueMonster()) {
-        array_push($combatLog, "Phew, " . $monsterTypes[$monsterIndex]['name'] . " missed..");
-    } elseif ($critChance >= $toCrit) {
+    if ($critChance >= $toCrit) {
         array_push($combatLog, $monsterTypes[$monsterIndex]['name'] . " strikes a murderous blow to " . $_SESSION['hero']['name'] . " for <strong>" . floor($criticalDamage) . " damage!</strong>");
         $_SESSION['hero']['hitpoints'] = $_SESSION['hero']['hitpoints'] - floor($criticalDamage);
+    } elseif ($monsterTypes[$monsterIndex]['chanceToHit'] < toHitValueMonster()) {
+        array_push($combatLog, "Phew, " . $monsterTypes[$monsterIndex]['name'] . " missed..");
     } else {
         array_push($combatLog, $monsterTypes[$monsterIndex]['name'] . " hits " . $_SESSION['hero']['name'] . " for " . $damage . " damage!");
         $_SESSION['hero']['hitpoints'] = $_SESSION['hero']['hitpoints'] - $damage;
@@ -126,36 +126,103 @@ function levelUp()
         }
         $_SESSION['hero']['hitpointsMax'] = $_SESSION['hero']['hitpointsMax'] + 5;
         $_SESSION['hero']['hitpoints'] = $_SESSION['hero']['hitpointsMax'];
+        $_SESSION['hero']['stamina'] = $_SESSION['hero']['staminaMax'];
+        $_SESSION['hero']['gold'] += 75;
         array_push($_SESSION['levelUpMsg'], "You gain +5 Max HP.");
         array_push($_SESSION['levelUpMsg'], "You gain +5 Fame.");
         checkToAddEvasionOrHitChance($_SESSION['hero']['level']);
+        array_push($_SESSION['levelUpMsg'], "You earn 75 gold!");
     }
 }
 
+//tweaks monst xp awarded based on level difference
 function xpReward()
 {
     global $monsterTypes, $monsterIndex;
 
-    if ($_SESSION['hero']['level'] > $monsterTypes[$monsterIndex]['level']) {
-        $xpReward = floor($monsterTypes[$monsterIndex]['experience'] / 2);
-    } else {
-        $xpReward = $monsterTypes[$monsterIndex]['experience'];
+    $levelDifference = $_SESSION['hero']['level'] - $monsterTypes[$monsterIndex]['level'];
+
+    // Default XP reward
+    $xpReward = $monsterTypes[$monsterIndex]['experience'];
+
+    // Adjust XP reward based on level difference using switch-case
+    switch ($levelDifference) {
+        case 1:
+            $xpReward *= 1;
+            break;
+        case 2:
+            $xpReward *= 0.9; // 90% of the original XP
+            break;
+        case 3:
+            $xpReward *= 0.8; // 80% of the original XP
+            break;
+        case 4:
+            $xpReward *= 0.7;
+            break;
+        case 5:
+            $xpReward *= 0.5;
+            break;
+        default:
+            if ($levelDifference > 5) {
+                $xpReward *= 0.1;
+            }
+            break;
     }
 
-    return $xpReward;
+    return floor($xpReward); // Round down the result if needed
 }
-
+//Tweaks monster gold-drop based on level difference
 function goldReward()
 {
     global $monsterTypes, $monsterIndex;
 
-    if ($_SESSION['hero']['level'] > $monsterTypes[$monsterIndex]['level']) {
-        $goldReward = floor($monsterTypes[$monsterIndex]['goldDrop'] / 2);
-    } else {
-        $goldReward = $monsterTypes[$monsterIndex]['goldDrop'];
+    $levelDifference = $_SESSION['hero']['level'] - $monsterTypes[$monsterIndex]['level'];
+
+    // Default XP reward
+    $goldReward = $monsterTypes[$monsterIndex]['goldDrop'];
+
+    // Adjust XP reward based on level difference using switch-case
+    switch ($levelDifference) {
+        case 1:
+            $goldReward *= 1;
+            break;
+        case 2:
+            $goldReward *= 0.9; // 90% of the original XP
+            break;
+        case 3:
+            $goldReward *= 0.8; // 80% of the original XP
+            break;
+        case 4:
+            $goldReward *= 0.7;
+            break;
+        case 5:
+            $goldReward *= 0.5;
+            break;
+        default:
+            if ($levelDifference > 5) {
+                $goldReward *= 0.1;
+            }
+            break;
     }
 
-    return $goldReward;
+    return floor($goldReward);
+}
+
+//Similar to regenerateStamina, regenerates HP based on time difference between time()
+//and last time since update. Values for regenRate are initialised at initialiseHero.php.
+function regenerateHP()
+{
+    $currentTime = time();
+    $lastHPupdate = $_SESSION['hero']['lastHPupdate'];
+    $elapsedTime = $currentTime - $lastHPupdate;
+
+    $hpRegenRate = $_SESSION['hero']['hpRegenRate'];
+    $regenAmount = floor($elapsedTime / 60) * $hpRegenRate;
+
+    $_SESSION['hero']['hitpoints'] = min($_SESSION['hero']['hitpointsMax'], $_SESSION['hero']['hitpoints'] + $regenAmount);
+
+    // Update the timestamp of the last HP update
+    $_SESSION['hero']['lastHPupdate'] = $currentTime;
 }
 
 function regenerateStamina()
@@ -166,7 +233,7 @@ function regenerateStamina()
 
     // Calculate the amount of stamina to regenerate based on the regeneration rate
     $staminaRegenRate = $_SESSION['hero']['staminaRegenRate'];
-    $regenAmount = floor($elapsedTime / 60) * $staminaRegenRate; // 1 unit per minute
+    $regenAmount = floor($elapsedTime / 60) * $staminaRegenRate; // 5 units per minute
 
     // Update stamina, ensuring it doesn't exceed the maximum
     $_SESSION['hero']['stamina'] = min($_SESSION['hero']['staminaMax'], $_SESSION['hero']['stamina'] + $regenAmount);
@@ -175,11 +242,20 @@ function regenerateStamina()
     $_SESSION['hero']['lastStaminaUpdate'] = $currentTime;
 }
 
+//Runs regenHP and Stamina if 3+ minutes have passed since last update.
 function checkRegenerationTime()
 {
 
     if (isset($_SESSION['hero']) && time() - $_SESSION['hero']['lastStaminaUpdate'] >= 180) {
         regenerateStamina();
+        regenerateHP();
+    }
+}
+
+function noNegativeStamina()
+{
+    if ($_SESSION['hero']['stamina'] < 0) {
+        $_SESSION['hero']['stamina'] = 0;
     }
 }
 
@@ -222,8 +298,10 @@ function doBattle($playerRetreat)
 
         $turnCounter++;
         $staminaCost = $turnCounter;
-        $_SESSION['hero']['stamina'] -= $staminaCost;
     } while ($_SESSION['hero']['hitpoints'] > $playerRetreat);
+    //reduce hero Grit = number of turns.
+    $_SESSION['hero']['stamina'] -= $staminaCost;
+    noNegativeStamina();
 }
 
 //applies the effect of key => healing items bought in the store.
@@ -343,4 +421,21 @@ function getDisplayKey($key)
         default:
             return $key;
     }
+}
+
+function getPlayerGender()
+{
+    switch ($_SESSION['hero']['gender']) {
+        case 'male':
+            $genderPronoun = 'his';
+            break;
+        case 'female':
+            $genderPronoun = 'her';
+            break;
+
+        default:
+            $genderPronoun = 'their';
+            break;
+    }
+    return $genderPronoun;
 }

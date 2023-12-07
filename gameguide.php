@@ -12,7 +12,8 @@ checkRegenerationTime();
                 some of the ones you see displayed.</p>
             <h3>Hitpoints or HP</h3>
             <p>You know this one. Loose em all and you're dead. Can be replenished by
-                various means, bandages being one. Try the shop.</p>
+                various means, bandages being one. Try the shop. You also heal for a small amount
+                over time, though not as quickly as Grit recovers.</p>
             <h3>Grit</h3>
             <p>Grit is the new stamina. It depletes during actions taken, such as combat.
                 It regenerates naturally over time after a few minutes, reload a page or switch between pages
@@ -24,8 +25,8 @@ checkRegenerationTime();
             </p>
             <h3>Experience or XP</h3>
             <p>No surprises here. Gained by slapping monsters in the face. Get enough and you
-                level up. Leveling up grants +5 max HP, replenished life, an increase in fame and a bonus to one of two additional stats.
-                Sweet!</p>
+                level up. Leveling up grants +5 max HP, replenished life and Grit, an increase in fame and a bonus to one of two additional stats.
+                Sweet! Did I mention you get gold? You get some gold too.</p>
             <h3>Initiative</h3>
             <p>This is a measure of how quick your Hero is and affects whether you get to
                 act first on any particular turn during combat.</p>

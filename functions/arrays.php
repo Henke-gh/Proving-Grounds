@@ -50,7 +50,8 @@ $startingWeapons = [
     [
         'name' => 'Wooden Staff',
         'damage' => 3,
-        'initiative' => 4
+        'initiative' => 4,
+        'evasion' => 2
     ]
 ];
 
@@ -65,6 +66,16 @@ $vendorItems = [
             'name' => 'Elixir of Life',
             'hitpoints' => 10,
             'cost' => 20
+        ],
+        [
+            'name' => 'Murahan Salve',
+            'hitpoints' => 20,
+            'cost' => 35
+        ],
+        [
+            'name' => 'Sanctified Tea',
+            'hitpoints' => 40,
+            'cost' => 70
         ],
     ],
     'weapons' => [
@@ -103,7 +114,7 @@ $vendorItems = [
         ],
         [
             'name' => 'Gladiator Breastplate',
-            'absorb' => 3,
+            'absorb' => 4,
             'evasion' => -2,
             'cost' => 550,
         ],
@@ -151,14 +162,14 @@ $monsterTypes = [
             'damage' => 4
         ],
         'experience' => 15,
-        'goldDrop' => 20,
+        'goldDrop' => 25,
     ],
     [
         'name' => 'Scabby Goblin',
         'level' => 2,
         'hitpoints' => 8,
         'initiative' => 9,
-        'chanceToHit' => 7,
+        'chanceToHit' => 8,
         'chanceToCrit' => 7,
         'evasion' => 3,
         'weapon' => [
@@ -166,7 +177,7 @@ $monsterTypes = [
             'damage' => 3
         ],
         'experience' => 15,
-        'goldDrop' => 20,
+        'goldDrop' => 25,
     ],
     [
         'name' => 'Young Troll',
@@ -181,7 +192,7 @@ $monsterTypes = [
             'damage' => 10
         ],
         'experience' => 20,
-        'goldDrop' => 25,
+        'goldDrop' => 30,
     ],
     [
         'name' => 'Bandit Thug',
@@ -196,14 +207,14 @@ $monsterTypes = [
             'damage' => 5
         ],
         'experience' => 20,
-        'goldDrop' => 25,
+        'goldDrop' => 30,
     ],
     [
         'name' => 'Veteran Legionnaire',
         'level' => 6,
         'hitpoints' => 14,
         'initiative' => 8,
-        'chanceToHit' => 10,
+        'chanceToHit' => 11,
         'chanceToCrit' => 6,
         'evasion' => 3,
         'weapon' => [
@@ -211,14 +222,14 @@ $monsterTypes = [
             'damage' => 6
         ],
         'experience' => 25,
-        'goldDrop' => 30,
+        'goldDrop' => 35,
     ],
     [
         'name' => 'Angvarian Bull',
         'level' => 6,
         'hitpoints' => 16,
         'initiative' => 5,
-        'chanceToHit' => 7,
+        'chanceToHit' => 8,
         'chanceToCrit' => 5,
         'evasion' => 5,
         'weapon' => [
@@ -226,14 +237,14 @@ $monsterTypes = [
             'damage' => 8
         ],
         'experience' => 25,
-        'goldDrop' => 30,
+        'goldDrop' => 35,
     ],
     [
         'name' => 'Monk of Zhe',
         'level' => 8,
         'hitpoints' => 21,
         'initiative' => 7,
-        'chanceToHit' => 10,
+        'chanceToHit' => 13,
         'chanceToCrit' => 5,
         'evasion' => 4,
         'weapon' => [
@@ -241,14 +252,14 @@ $monsterTypes = [
             'damage' => 8
         ],
         'experience' => 40,
-        'goldDrop' => 35,
+        'goldDrop' => 40,
     ],
     [
         'name' => "Chthonian Nightmare",
-        'level' => 15,
+        'level' => 12,
         'hitpoints' => 85,
         'initiative' => 10,
-        'chanceToHit' => 8,
+        'chanceToHit' => 15,
         'chanceToCrit' => 20,
         'evasion' => 5,
         'weapon' => [
@@ -256,7 +267,7 @@ $monsterTypes = [
             'damage' => 15
         ],
         'experience' => 85,
-        'goldDrop' => 50,
+        'goldDrop' => 60,
     ],
     [
         'name' => 'XP Goblin',
