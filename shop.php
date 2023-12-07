@@ -13,8 +13,8 @@ checkRegenerationTime();
     </div>
     <div class="playerShopInfo">
         <h3><?= $_SESSION['hero']['name']; ?></h3>
-        <p><?= "Current gold: " . $_SESSION['hero']['gold']; ?></p>
-        <p><?= "Current HP: " . $_SESSION['hero']['hitpoints']; ?></p>
+        <p>Current gold: <?= $_SESSION['hero']['gold']; ?></p>
+        <p>Current HP: <?= $_SESSION['hero']['hitpoints'] . "/" . $_SESSION['hero']['hitpointsMax']; ?></p>
     </div>
     <div class="shopContainer">
         <div class="shopItems">
@@ -55,9 +55,7 @@ checkRegenerationTime();
                     <p>My selection is quite unrivaled!..</p>
                 <?php endif;
                 unset($_SESSION['message']); ?>
-                <form method="post" action="myHero.php">
-                    <button type="submit" name="back">Back</button>
-                </form>
+                <a href="/myHero.php"><button type="submit" name="back">Back</button></a>
             </div>
         </div>
     </div>

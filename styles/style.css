@@ -62,10 +62,24 @@ nav {
   padding-top: 5px;
 }
 
+.gameNav {
+  border-top: none;
+  padding-top: 0;
+  padding-bottom: 10px;
+}
+
+.gameNav button:nth-child(1) {
+  margin-right: 10px;
+}
+
 a {
   text-decoration: none;
   font-size: 1.3em;
   color: var(--lightMustard);
+}
+
+a button {
+  font-size: 1em;
 }
 
 a:hover {
@@ -249,9 +263,10 @@ footer {
   font-weight: 600;
 }
 
-.vendorImg button {
+.vendorImg a button {
   width: fit-content;
   margin: 0 auto;
+  font-size: 1em;
 }
 
 .vendorBackContainer {
@@ -283,7 +298,7 @@ footer {
 .playerShopInfo p {
   margin: 0;
   font-family: var(--fontRokkitt);
-  font-weight: 400;
+  font-weight: bold;
   font-size: 1em;
 }
 
@@ -335,6 +350,44 @@ footer {
 .combatText {
   font-family: var(--fontRokkitt);
   color: var(--darkBrown);
+}
+
+.tavernContainer {
+  display: flex;
+  flex-direction: column;
+  max-width: 70%;
+}
+
+.tavernContainer .playerShopInfo {
+  width: fit-content;
+  margin: 0 auto;
+  margin-bottom: 5px;
+}
+
+.tavernContainer article {
+  margin-bottom: 2%;
+  padding: 10px;
+  background-color: var(--mustard);
+  color: var(--darkBrown);
+  border: 5px solid var(--lightMustard);
+}
+
+.tavernBarWork {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--mustard);
+  border: 5px solid var(--lightMustard);
+  color: var(--darkBrown);
+  font-family: var(--fontRokkitt);
+  font-size: 1.1em;
+  font-weight: bold;
+  padding: 10px;
+  margin: 0 auto;
+}
+
+.tavernBarWork a {
+  margin: 0 auto;
+  padding-top: 15px;
 }
 
 .graveyardImg {
@@ -412,5 +465,11 @@ footer {
 
   .aboutPageContainer {
     max-width: 80%;
+  }
+
+  .tavernContainer {
+    display: flex;
+    flex-direction: column;
+    max-width: 90%;
   }
 }

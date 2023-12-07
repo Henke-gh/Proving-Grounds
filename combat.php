@@ -42,11 +42,11 @@ if (isset($_POST['monster'], $_POST['retreatValue'])) {
                 <label id="hpSelect">Retreat at HP:</label>
                 <select name="retreatValue" id="hpSelect">
                     <?php
-                    $retreat = 0;
+                    $retreat = 100;
                     for ($i = 0; $i < 11; $i++) : ?>
                         <option value="<?= $retreat; ?>"><?= $retreat . "%"; ?></option>
                     <?php
-                        $retreat = $retreat + 10;
+                        $retreat = $retreat - 10;
                     endfor; ?>
                 </select>
                 <button type="submit">Do battle!</button>

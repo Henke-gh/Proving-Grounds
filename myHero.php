@@ -9,6 +9,11 @@ require_once __DIR__ . "/nav/header.html";
 ?>
 
 <main>
+    <nav class="gameNav">
+        <a href="/combat.php"><button type="submit" name="doCombat">Enter the Arena</button></a>
+        <a href="/shop.php"> <button type="submit" name="visitShop">Visit Emporium</button></a>
+        <a href="/tavern.php"> <button type="submit" name="visitShop">Tavern</button></a>
+    </nav>
     <?php if (isset($_SESSION['levelUpMsg'])) : ?>
         <div class="levelUpBox">
             <h3><?= "You have reached level " . $_SESSION['hero']['level'] . "!"; ?></h3>
@@ -33,12 +38,6 @@ require_once __DIR__ . "/nav/header.html";
                 <li><span class="bold">Gold: </span><?= $_SESSION['hero']['gold']; ?></li>
                 <li><span class="bold">XP: </span><?= $_SESSION['hero']['experience'] . "/" . $levelUp[$_SESSION['hero']['level']]['cost']; ?></li>
             </ul>
-            <form method="post" action="combat.php">
-                <button type="submit" name="doCombat">Choose opponent</button>
-            </form>
-            <form method="post" action="shop.php">
-                <button type="submit" name="visitShop">Shop items</button>
-            </form>
         </div>
         <div class="myHeroWrap charStats">
             <h3>Inventory</h3>

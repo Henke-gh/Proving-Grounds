@@ -124,11 +124,11 @@ $vendorItems = [
 
 $monsterTypes = [
     [
-        'name' => 'Skeletal Priest',
+        'name' => 'Cowardly Cultist',
         'level' => 1,
         'hitpoints' => 6,
         'initiative' => 4,
-        'chanceToHit' => 4,
+        'chanceToHit' => 5,
         'chanceToCrit' => 4,
         'evasion' => 0,
         'weapon' => [
@@ -139,7 +139,7 @@ $monsterTypes = [
         'goldDrop' => 15,
     ],
     [
-        'name' => 'Skeleton Knight',
+        'name' => 'Bandit',
         'level' => 2,
         'hitpoints' => 9,
         'initiative' => 5,
@@ -147,14 +147,14 @@ $monsterTypes = [
         'chanceToCrit' => 5,
         'evasion' => 1,
         'weapon' => [
-            'name' => 'Long Sword',
+            'name' => 'Crooked Sword',
             'damage' => 4
         ],
         'experience' => 15,
         'goldDrop' => 20,
     ],
     [
-        'name' => 'Scabby Ratman',
+        'name' => 'Scabby Goblin',
         'level' => 2,
         'hitpoints' => 8,
         'initiative' => 9,
@@ -184,7 +184,22 @@ $monsterTypes = [
         'goldDrop' => 25,
     ],
     [
-        'name' => 'Legionnaire Lancer',
+        'name' => 'Bandit Thug',
+        'level' => 4,
+        'hitpoints' => 12,
+        'initiative' => 5,
+        'chanceToHit' => 9,
+        'chanceToCrit' => 5,
+        'evasion' => 3,
+        'weapon' => [
+            'name' => 'Long Sword',
+            'damage' => 5
+        ],
+        'experience' => 20,
+        'goldDrop' => 25,
+    ],
+    [
+        'name' => 'Veteran Legionnaire',
         'level' => 6,
         'hitpoints' => 14,
         'initiative' => 8,
@@ -199,8 +214,38 @@ $monsterTypes = [
         'goldDrop' => 30,
     ],
     [
+        'name' => 'Angvarian Bull',
+        'level' => 6,
+        'hitpoints' => 16,
+        'initiative' => 5,
+        'chanceToHit' => 7,
+        'chanceToCrit' => 5,
+        'evasion' => 5,
+        'weapon' => [
+            'name' => 'Horns',
+            'damage' => 8
+        ],
+        'experience' => 25,
+        'goldDrop' => 30,
+    ],
+    [
+        'name' => 'Monk of Zhe',
+        'level' => 8,
+        'hitpoints' => 21,
+        'initiative' => 7,
+        'chanceToHit' => 10,
+        'chanceToCrit' => 5,
+        'evasion' => 4,
+        'weapon' => [
+            'name' => 'Twin Sickles',
+            'damage' => 8
+        ],
+        'experience' => 40,
+        'goldDrop' => 35,
+    ],
+    [
         'name' => "Chthonian Nightmare",
-        'level' => 10,
+        'level' => 15,
         'hitpoints' => 85,
         'initiative' => 10,
         'chanceToHit' => 8,
