@@ -10,6 +10,7 @@ if (isset($_POST['monster'], $_POST['retreatValue'])) {
         $_SESSION['staminaDepleted'] = "Your hero lacks the grit to press on. Maybe you should rest?";
     } else {
         doBattle($playerRetreat);
+        savePlayerProgress();
     }
 }
 ?>
@@ -20,7 +21,7 @@ if (isset($_POST['monster'], $_POST['retreatValue'])) {
     <?php if (isset($_SESSION['staminaDepleted'])) : ?>
         <div class="monsterSelect">
             <p><?= $_SESSION['staminaDepleted']; ?></p>
-            <form action="/myHero.php">
+            <form action="/../app/myHero.php">
                 <button type="submit">Back</button>
             </form>
         </div>
@@ -61,7 +62,7 @@ if (isset($_POST['monster'], $_POST['retreatValue'])) {
             <?php foreach ($combatLog as $line) : ?>
                 <p class="combatText"><?= $line; ?></p>
             <?php endforeach; ?>
-            <form method="post" action="/../app/myHero.php">
+            <form method="post" action="/functions/resolveCombat.php">
                 <button type="submit" name="afterCombat">Continue</button>
             </form>
         </div>

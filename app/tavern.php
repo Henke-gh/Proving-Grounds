@@ -1,7 +1,14 @@
 <?php
 require_once __DIR__ . "/../functions/startSession.php";
 require_once __DIR__ . "/../nav/header.html";
-checkRegenerationTime();
+if (isset($_SESSION['hero']) && $_SESSION['hero']['resource']['hitpoints'] > 0) {
+    heroDeath();
+    checkRegenerationTime();
+    levelUp();
+} else {
+    unset($_SESSION['hero']);
+    header('Location: /app/createNewHero.php');
+}
 ?>
 
 <main>

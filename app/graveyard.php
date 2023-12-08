@@ -1,6 +1,9 @@
 <?php
 require_once __DIR__ . "/../functions/startSession.php";
 require_once __DIR__ . "/../nav/header.html";
+if ($_SESSION['hero']['resource']['hitpoints'] < 0) {
+    unset($_SESSION['hero']);
+}
 ?>
 
 <main>

@@ -93,10 +93,25 @@ function monsterAttack()
 }
 
 //Checks player HP to determine whether player has died or not.
+//If dead, wipes playerHero_data, it's new character time!
 function heroDeath()
 {
-    if (isset($_SESSION['hero']) && $_SESSION['hero']['resource']['hitpoints'] <= 0) {
-        header('Location: graveyard.php');
+    global $db;
+
+    if (isset($_SESSION['user_id']) && $_SESSION['hero']['resource']['hitpoints'] <= 0) {
+        try {
+            // Prepare and execute the DELETE statement
+            $stmt = $db->prepare('DELETE FROM playerHero WHERE user_id = :userID');
+            $stmt->bindParam(':userID', $_SESSION['user_id']);
+            $stmt->execute();
+
+            // Output success message or perform other actions if needed
+            //echo "Player data deleted successfully.";
+        } catch (PDOException $e) {
+            // Handle errors
+            echo "Error: " . $e->getMessage();
+        }
+        header('Location: /../app/graveyard.php');
     }
 }
 
@@ -363,14 +378,18 @@ function applyTrinketItemEffects()
 function removeWeaponBonuses()
 {
     $_SESSION['hero']['combat']['initiative'] -= $_SESSION['hero']['weapon']['initiative'];
-    $_SESSION['hero']['combat']['evasion'] -= $_SESSION['hero']['weapon']['evasion'];
+    if (in_array('evasion', $_SESSION['hero']['weapon'])) {
+        $_SESSION['hero']['combat']['evasion'] -= $_SESSION['hero']['weapon']['evasion'];
+    }
 }
 
 //adds weapon bonuses to the player, used when switching weapons.
 function addWeaponBonuses()
 {
     $_SESSION['hero']['combat']['initiative'] += $_SESSION['hero']['weapon']['initiative'];
-    $_SESSION['hero']['combat']['evasion'] += $_SESSION['hero']['weapon']['evasion'];
+    if (in_array('evasion', $_SESSION['hero']['weapon'])) {
+        $_SESSION['hero']['combat']['evasion'] += $_SESSION['hero']['weapon']['evasion'];
+    }
 }
 
 //removes armour bonuses from the player, used when switching armour.
@@ -455,4 +474,66 @@ function getPlayerGender()
             break;
     }
     return $genderPronoun;
+}
+
+//checks username availability on new user registration.
+function isUsernameAvailable($username, $pdo)
+{
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM users WHERE username = :username");
+    $stmt->bindParam(':username', $username);
+    $stmt->execute();
+
+    // Fetch the count
+    $count = $stmt->fetchColumn();
+
+    // If count is 0, the username is available; otherwise, it's already taken
+    return $count === 0;
+}
+
+function savePlayerProgress()
+{
+    // Check conditions
+    if (isset($_SESSION['user_id']) && $_SESSION['hero']['resource']['hitpoints'] > 0) {
+        deletePlayerData();
+        writePlayerData();
+    }
+}
+
+function deletePlayerData()
+{
+    global $db;
+    try {
+        // Prepare and execute the DELETE statement
+        $stmt = $db->prepare('DELETE FROM playerHero WHERE user_id = :userID');
+        $stmt->bindParam(':userID', $_SESSION['user_id']);
+        $stmt->execute();
+
+        // Output success message or perform other actions if needed
+        //echo "Player data deleted successfully.";
+    } catch (PDOException $e) {
+        // Handle errors
+        echo "Error: " . $e->getMessage();
+    }
+}
+
+function writePlayerData()
+{
+    global $db;
+
+    $playerData = json_encode($_SESSION['hero']);
+    $version = 1;
+
+    try {
+
+        $prepare = $db->prepare('INSERT INTO playerHero (user_id, playerHero_data, version)
+        VALUES (:userID, :heroData, :version)');
+
+        $prepare->bindParam(':userID', $_SESSION['user_id']);
+        $prepare->bindParam(':heroData', $playerData);
+        $prepare->bindParam(':version', $version);
+        $prepare->execute();
+    } catch (PDOException $e) {
+        // Handle errors
+        echo "Error: " . $e->getMessage();
+    }
 }

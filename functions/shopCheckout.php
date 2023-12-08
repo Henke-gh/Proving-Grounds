@@ -39,5 +39,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['buyItem'])) {
         }
     }
 }
+savePlayerProgress();
 header('Location: /../app/shop.php');
 exit();

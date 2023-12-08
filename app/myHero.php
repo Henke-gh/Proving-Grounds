@@ -1,9 +1,18 @@
 <?php
 require_once __DIR__ . "/../functions/startSession.php";
-if (isset($_SESSION['hero'])) {
-    checkRegenerationTime();
-    heroDeath();
-    levelUp();
+
+if (!isset($_SESSION['user_id'])) {
+    $_SESSION['loginError'] = "Something went wrong. Please login again.";
+    header('Location: /../index.php');
+} else {
+    if (isset($_SESSION['hero']) && $_SESSION['hero']['resource']['hitpoints'] > 0) {
+        heroDeath();
+        checkRegenerationTime();
+        levelUp();
+    } else {
+        unset($_SESSION['hero']);
+        header('Location: /app/createNewHero.php');
+    }
 }
 require_once __DIR__ . "/../nav/header.html";
 ?>

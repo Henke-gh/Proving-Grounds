@@ -1,7 +1,5 @@
 <?php
-require __DIR__ . "/arrays.php";
-require_once __DIR__ . "/functions.php";
-session_start();
+require __DIR__ . "/startSession.php";
 
 if (isset($_POST['createChar'])) {
     $weaponIndex = $_POST['weaponIndex'];
@@ -15,6 +13,17 @@ if (isset($_POST['createChar'])) {
     $_SESSION['hero']['resource']['hpRegenRate'] = 2;
     $_SESSION['hero']['weapon'] = $startingWeapons[$weaponIndex];
     addWeaponBonuses();
+
+    $playerData = json_encode($_SESSION['hero']);
+    $version = 1;
+
+    $prepare = $db->prepare('INSERT INTO playerHero (user_id, playerHero_data, version)
+            VALUES (:userID, :heroData, :version)');
+
+    $prepare->bindParam(':userID', $_SESSION['user_id']);
+    $prepare->bindParam(':heroData', $playerData);
+    $prepare->bindParam(':version', $version);
+    $prepare->execute();
 
     header('Location: /../app/myHero.php');
 }
