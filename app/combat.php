@@ -28,6 +28,11 @@ if (isset($_POST['monster'], $_POST['retreatValue'])) {
     <?php endif;
     unset($_SESSION['staminaDepleted']); ?>
     <?php if (!isset($_POST['monster'])) : ?>
+        <div class="playerShopInfo combatInfo">
+            <h3><?= $_SESSION['hero']['general']['name']; ?></h3>
+            <p>HP: <?= $_SESSION['hero']['resource']['hitpoints'] . "/" . $_SESSION['hero']['resource']['hitpointsMax']; ?></p>
+            <p>Grit: <?= $_SESSION['hero']['resource']['stamina'] . "/" . $_SESSION['hero']['resource']['staminaMax']; ?></p>
+        </div>
         <div class="monsterSelect">
             <form method="post">
                 <label id="monsterSelect">Select foe:</label>
@@ -52,7 +57,7 @@ if (isset($_POST['monster'], $_POST['retreatValue'])) {
                 </select>
                 <button type="submit">Do battle!</button>
             </form>
-            <form action="/../app/myHero.php">
+            <form class="combatBack" action="/../app/myHero.php">
                 <button type="submit">Back</button>
             </form>
         </div>

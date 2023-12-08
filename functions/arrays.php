@@ -391,6 +391,26 @@ $levelUp = [
         'level' => 15,
         'cost' => 3500
     ],
+    [
+        'level' => 16,
+        'cost' => 4500
+    ],
+    [
+        'level' => 17,
+        'cost' => 5500
+    ],
+    [
+        'level' => 18,
+        'cost' => 6500
+    ],
+    [
+        'level' => 19,
+        'cost' => 8000
+    ],
+    [
+        'level' => 20,
+        'cost' => 10000
+    ],
 ];
 
 $avatars = [

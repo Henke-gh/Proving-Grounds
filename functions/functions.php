@@ -134,23 +134,26 @@ function levelUp()
     global $levelUp, $fameTitle;
 
     $newFameLevel = $_SESSION['hero']['general']['fameLevel'] + 1;
-
-    if ($_SESSION['hero']['general']['experience'] >= $levelUp[$_SESSION['hero']['general']['level']]['cost']) {
-        $_SESSION['levelUpMsg'] = [];
-        $_SESSION['hero']['general']['level'] = $_SESSION['hero']['general']['level'] + 1;
-        $_SESSION['hero']['general']['fame'] = $_SESSION['hero']['general']['fame'] + 5;
-        if ($_SESSION['hero']['general']['fame'] >= $fameTitle[$newFameLevel]['fame']) {
-            $_SESSION['hero']['general']['fameLevel'] = $_SESSION['hero']['general']['fameLevel'] + 1;
-            $_SESSION['hero']['general']['fameTitle'] = $fameTitle[$_SESSION['hero']['general']['fameLevel']]['title'];
+    if ($_SESSION['hero']['general']['level'] < 20) {
+        if ($_SESSION['hero']['general']['experience'] >= $levelUp[$_SESSION['hero']['general']['level']]['cost']) {
+            $_SESSION['levelUpMsg'] = [];
+            $_SESSION['hero']['general']['level'] = $_SESSION['hero']['general']['level'] + 1;
+            $_SESSION['hero']['general']['fame'] = $_SESSION['hero']['general']['fame'] + 5;
+            if ($_SESSION['hero']['general']['fame'] >= $fameTitle[$newFameLevel]['fame']) {
+                $_SESSION['hero']['general']['fameLevel'] = $_SESSION['hero']['general']['fameLevel'] + 1;
+                $_SESSION['hero']['general']['fameTitle'] = $fameTitle[$_SESSION['hero']['general']['fameLevel']]['title'];
+            }
+            $_SESSION['hero']['resource']['hitpointsMax'] = $_SESSION['hero']['resource']['hitpointsMax'] + 5;
+            $_SESSION['hero']['resource']['hitpoints'] = $_SESSION['hero']['resource']['hitpointsMax'];
+            $_SESSION['hero']['resource']['stamina'] = $_SESSION['hero']['resource']['staminaMax'];
+            $_SESSION['hero']['general']['gold'] += 75;
+            array_push($_SESSION['levelUpMsg'], "You gain +5 Max HP.");
+            array_push($_SESSION['levelUpMsg'], "You gain +5 Fame.");
+            checkToAddEvasionOrHitChance($_SESSION['hero']['general']['level']);
+            array_push($_SESSION['levelUpMsg'], "You earn 75 gold!");
         }
-        $_SESSION['hero']['resource']['hitpointsMax'] = $_SESSION['hero']['resource']['hitpointsMax'] + 5;
-        $_SESSION['hero']['resource']['hitpoints'] = $_SESSION['hero']['resource']['hitpointsMax'];
-        $_SESSION['hero']['resource']['stamina'] = $_SESSION['hero']['resource']['staminaMax'];
-        $_SESSION['hero']['general']['gold'] += 75;
-        array_push($_SESSION['levelUpMsg'], "You gain +5 Max HP.");
-        array_push($_SESSION['levelUpMsg'], "You gain +5 Fame.");
-        checkToAddEvasionOrHitChance($_SESSION['hero']['level']);
-        array_push($_SESSION['levelUpMsg'], "You earn 75 gold!");
+    } else {
+        $_SESSION['hero']['general']['experience'] = $levelUp[$_SESSION['hero']['general']['level']]['cost'];
     }
 }
 

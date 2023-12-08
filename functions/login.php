@@ -28,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['userLogin'])) {
         //where if no player Hero is found they get sent to character creation.
         if ($user && password_verify($userPW, $user['password_hash'])) {
             $_SESSION['user_id'] = $user['id'];
+            $_SESSION['username'] = ucfirst($user['username']);
 
             try {
                 // Prepare and execute the SELECT statement

@@ -162,6 +162,26 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 15px;
+}
+
+.landingPageContainer .loginNewsContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  max-width: 60%;
+}
+
+.landingLogin {
+  background-color: var(--mustard);
+  border: 5px solid var(--lightMustard);
+  color: var(--darkBrown);
+  padding: 10px;
+}
+
+.login {
+  width: fit-content;
+  margin: 0 auto;
 }
 
 .aboutPageContainer {
@@ -344,8 +364,17 @@ footer {
 
 .monsterSelect {
   background-color: var(--mustard);
+  border: 5px solid var(--lightMustard);
   color: var(--darkBrown);
   padding: 2%;
+}
+
+.combatBack {
+  margin-top: 10%;
+}
+
+.combatInfo {
+  margin-bottom: 10px;
 }
 
 .combatLog {
@@ -415,10 +444,19 @@ footer {
     box-sizing: border-box;
     padding: 5px;
   }
+
+  .landingPageContainer .loginNewsContainer {
+    max-width: 90%;
+  }
 }
 
 @media only screen and (max-width: 600px) {
   .shopContainer {
+    flex-direction: column;
+  }
+
+  .landingPageContainer .loginNewsContainer {
+    max-width: 95%;
     flex-direction: column;
   }
 
