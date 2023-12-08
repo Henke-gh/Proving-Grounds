@@ -55,7 +55,7 @@ require_once __DIR__ . "/../nav/header.html";
                 <li><span class="bold">Weapon: </span><?= $_SESSION['hero']['weapon']['name']; ?></li>
                 <li><span class="bold">Armour: </span><?= $_SESSION['hero']['armour']['name']; ?></li>
                 <?php
-                if (!empty($_SESSION['heroInventory'])) : ?>
+                if (!empty($_SESSION['hero']['inventory'])) : ?>
                     <h4>Magical Objects</h4>
                     <?php foreach ($_SESSION['hero']['inventory'] as $item) : ?>
                         <li><span class="bold">Trinket: </span><?= $item; ?></li>

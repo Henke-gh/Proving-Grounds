@@ -349,7 +349,7 @@ function applyTrinketItemEffects()
 
             if (isset($_SESSION['hero']['evasion'])) {
                 $_SESSION['hero']['combat']['evasion'] += $evasionIncrease;
-                array_push($_SESSION['hero']['nventory'], $item['name']);
+                array_push($_SESSION['hero']['inventory'], $item['name']);
             } /* else {
                 Add error-handling
             } */
@@ -369,6 +369,16 @@ function applyTrinketItemEffects()
 
             if (isset($_SESSION['hero']['combat']['chanceToHit'])) {
                 $_SESSION['hero']['combat']['chanceToHit'] += $incToHit;
+                array_push($_SESSION['hero']['inventory'], $item['name']);
+            } /* else {
+                Add error-handling
+            } */
+        }
+        if ($category === "trinkets" && isset($item['absorb'])) {
+            $incAbsorb = $item['absorb'];
+
+            if (isset($_SESSION['hero']['combat']['absorb'])) {
+                $_SESSION['hero']['combat']['absorb'] += $incAbsorb;
                 array_push($_SESSION['hero']['inventory'], $item['name']);
             } /* else {
                 Add error-handling

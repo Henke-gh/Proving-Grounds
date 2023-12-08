@@ -36,7 +36,8 @@ require_once __DIR__ . "/nav/header.html";
                         The End Session button is now the Log Out button, which also saves your progress.</p>
                     <p>Don't worry, the game saves regularly even while playing.
                         Saving might mess up if you switch platforms without logging out though so beware.</p>
-                    <p>Next up - Monsters and Items. More.</p>
+                    <p>New monsters and items.</p>
+                    <p>Level cap is now 20.</p>
                 </article>
             </div>
         </div>

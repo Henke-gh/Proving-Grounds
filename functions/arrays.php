@@ -89,14 +89,14 @@ $vendorItems = [
             'name' => 'Blade-Staff',
             'damage' => 6,
             'initiative' => 4,
-            'cost' => 350,
+            'cost' => 340,
         ],
         [
             'name' => 'Twin Daggers',
             'damage' => 5,
             'evasion' => 4,
             'initiative' => 2,
-            'cost' => 300,
+            'cost' => 320,
         ],
         [
             'name' => 'War Axe',
@@ -105,9 +105,22 @@ $vendorItems = [
             'cost' => 450,
         ],
         [
+            'name' => 'Curved Sword',
+            'damage' => 9,
+            'evasion' => 3,
+            'initiative' => 3,
+            'cost' => 600,
+        ],
+        [
             'name' => 'Bastard Sword',
             'damage' => 12,
-            'initiative' => 5,
+            'initiative' => 6,
+            'cost' => 900,
+        ],
+        [
+            'name' => 'The Fist of Jorrek',
+            'damage' => 15,
+            'initiative' => 2,
             'cost' => 1200,
         ],
     ],
@@ -130,6 +143,12 @@ $vendorItems = [
             'evasion' => -2,
             'cost' => 550,
         ],
+        [
+            'name' => 'Lamellar Plate',
+            'absorb' => 6,
+            'evasion' => 0,
+            'cost' => 700,
+        ],
     ],
     'trinkets' => [
         [
@@ -146,6 +165,11 @@ $vendorItems = [
             'name' => 'Engraved Medal',
             'chanceToHit' => 2,
             'cost' => 650,
+        ],
+        [
+            'name' => 'Fragment of Tehir',
+            'absorb' => 3,
+            'cost' => 1100,
         ],
     ],
 ];
@@ -272,19 +296,79 @@ $monsterTypes = [
         'goldDrop' => 40,
     ],
     [
+        'name' => 'Disgraced Duelist',
+        'level' => 11,
+        'hitpoints' => 29,
+        'initiative' => 7,
+        'chanceToHit' => 17,
+        'chanceToCrit' => 5,
+        'evasion' => 5,
+        'weapon' => [
+            'name' => 'Rapier',
+            'damage' => 7
+        ],
+        'experience' => 45,
+        'goldDrop' => 45,
+    ],
+    [
+        'name' => 'Lumbering Giant',
+        'level' => 14,
+        'hitpoints' => 36,
+        'initiative' => 2,
+        'chanceToHit' => 16,
+        'chanceToCrit' => 5,
+        'evasion' => 2,
+        'weapon' => [
+            'name' => 'Medium-sized Tree',
+            'damage' => 14
+        ],
+        'experience' => 50,
+        'goldDrop' => 50,
+    ],
+    [
         'name' => "Chthonian Nightmare",
         'level' => 15,
-        'hitpoints' => 85,
+        'hitpoints' => 42,
         'initiative' => 10,
         'chanceToHit' => 20,
-        'chanceToCrit' => 15,
+        'chanceToCrit' => 13,
         'evasion' => 5,
         'weapon' => [
             'name' => 'Slithering Tentacle',
             'damage' => 15
         ],
-        'experience' => 85,
-        'goldDrop' => 60,
+        'experience' => 75,
+        'goldDrop' => 70,
+    ],
+    [
+        'name' => "Legionnaire Commander",
+        'level' => 17,
+        'hitpoints' => 48,
+        'initiative' => 10,
+        'chanceToHit' => 25,
+        'chanceToCrit' => 7,
+        'evasion' => 6,
+        'weapon' => [
+            'name' => 'War Sword',
+            'damage' => 11
+        ],
+        'experience' => 80,
+        'goldDrop' => 70,
+    ],
+    [
+        'name' => "Destroyer of Ambitions",
+        'level' => 21,
+        'hitpoints' => 72,
+        'initiative' => 10,
+        'chanceToHit' => 35,
+        'chanceToCrit' => 7,
+        'evasion' => 8,
+        'weapon' => [
+            'name' => 'Obsidian Maul',
+            'damage' => 16
+        ],
+        'experience' => 100,
+        'goldDrop' => 125,
     ],
     [
         'name' => 'XP Goblin',
