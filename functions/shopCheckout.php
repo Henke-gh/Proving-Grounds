@@ -8,9 +8,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['buyItem'])) {
             // Decode each item detail
             $itemShopArray = json_decode($itemDetail, true);
             foreach ($itemShopArray as $itemType => $item) {
-                if ($_SESSION['hero']['gold'] >= $item['cost'] && !in_array($item['name'], $_SESSION['heroInventory'])) {
+                if ($_SESSION['hero']['general']['gold'] >= $item['cost'] && !in_array($item['name'], $_SESSION['hero']['inventory'])) {
                     // Deduct the cost from the player's resources
-                    $_SESSION['hero']['gold'] -= $item['cost'];
+                    $_SESSION['hero']['general']['gold'] -= $item['cost'];
                     $_SESSION['message'] = "You bought " . $item['name'] . ".";
                     // Apply the necessary item effects, default case assumes a healing-item.
                     switch ($itemType) {
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['buyItem'])) {
                             applyHealingItemEffects();
                             break;
                     }
-                } elseif (in_array($item['name'], $_SESSION['heroInventory'])) {
+                } elseif (in_array($item['name'], $_SESSION['hero']['inventory'])) {
                     // Handle duplicates of unique items.
                     $_SESSION['message'] = "Unfortunately I can only sell you one of those.";
                 } else {

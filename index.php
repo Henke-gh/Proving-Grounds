@@ -6,44 +6,28 @@ if (isset($_SESSION['hero'])) {
 require_once __DIR__ . "/nav/header.html";
 ?>
 <main>
-    <div class="characterCreateWrap">
-        <?php if (!isset($_SESSION['hero'])) : ?>
-            <form class="characterCreate" method="post" action="/functions/initialiseHero.php">
-                <h2>Create your champion</h2>
-                <label id="heroName">Name your hero:</label>
-                <input class="heroNameInput" id="heroName" type="text" required name="heroName">
-                <label id="heroGender">Select gender:</label>
-                <select id="heroGender" name="heroGender">
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                </select>
-                <label id="avatarChoice">Choose avatar:</label>
-                <div class="avatarSelect">
-                    <input type="hidden" value="" id="selectedAvatar" name="heroAvatar" required>
-                    <?php
-                    $avatarIndex = 0;
-                    foreach ($avatars as $avatar) : ?>
-                        <div class="avatar">
-                            <img class="avatarImage" data-avatar-id="<?= $avatarIndex; ?>" src="<?= $avatar['url']; ?>">
-                        </div>
-                    <?php
-                        $avatarIndex++;
-                    endforeach; ?>
-                </div>
-                <label id="startingWeapon">Choose starting weapon:</label>
-                <select name="weaponIndex">
-                    <?php
-                    $weaponIndex = 0;
-                    foreach ($startingWeapons as $weapon) : ?>
-                        <option value="<?= $weaponIndex ?>"><?= $weapon['name']; ?></option>
-                    <?php
-                        $weaponIndex++;
-                    endforeach; ?>
-                </select>
-                <button type="submit" name="createChar">Create</button>
-            </form>
-        <?php endif; ?>
+    <div class="landingPageContainer">
+        <h1>Welcome to the Proving Grounds</h1>
+        <img src="/assets/images/crossing_swords.png">
+        <p>Log in:</p>
+        <form method="post" action="/functions/login.php">
+            <label id="userName">Enter Username:</label>
+            <input id="userName" type="text" required>
+            <label id="userPassword">Enter Password:</label>
+            <input id="userPassword" type="password" required>
+            <button type="submit" name="userLogin">Log in</button>
+        </form>
+
+        <p>Not registered? Do you want to embark on an adventure? Register a new account:</p>
+        <form action="post" accept="/function/registerNewUser.php">
+            <label id="newUserName">Enter Username:</label>
+            <input id="newUserName" type="text" required>
+            <label id="newUserPassword">Enter Password:</label>
+            <input id="newUserPassword" type="password" required>
+            <label id="newUserPasswordRepeat">Repeat Password:</label>
+            <input id="newUserPasswordRepeat" type="password" required>
+            <button type="submit" name="registerNew">Register</button>
+        </form>
     </div>
 </main>
 <?php

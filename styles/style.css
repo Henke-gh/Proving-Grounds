@@ -158,6 +158,12 @@ footer {
   padding: 5px;
 }
 
+.landingPageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .aboutPageContainer {
   display: flex;
   flex-direction: column;

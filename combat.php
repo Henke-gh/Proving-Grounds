@@ -6,7 +6,7 @@ checkRegenerationTime();
 if (isset($_POST['monster'], $_POST['retreatValue'])) {
     $monsterIndex = $_POST['monster'];
     $playerRetreat = $_POST['retreatValue'];
-    if ($_SESSION['hero']['stamina'] <= 0) {
+    if ($_SESSION['hero']['resource']['stamina'] <= 0) {
         $_SESSION['staminaDepleted'] = "Your hero lacks the grit to press on. Maybe you should rest?";
     } else {
         doBattle($playerRetreat);
@@ -56,7 +56,7 @@ if (isset($_POST['monster'], $_POST['retreatValue'])) {
             </form>
         </div>
     <?php elseif (!empty($combatLog)) : ?>
-        <h3><?= $_SESSION['hero']['name'] . " vs " . $monsterTypes[$monsterIndex]['name']; ?></h3>
+        <h3><?= $_SESSION['hero']['general']['name'] . " vs " . $monsterTypes[$monsterIndex]['name']; ?></h3>
         <div class="combatLog">
             <?php foreach ($combatLog as $line) : ?>
                 <p class="combatText"><?= $line; ?></p>

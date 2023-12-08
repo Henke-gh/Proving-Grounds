@@ -1,22 +1,30 @@
 <?php
 
 $player = [
-    'name' => 'Hero',
-    'gender' => 'Unknown',
-    'avatar' => 0,
-    'level' => 1,
-    'fame' => 0,
-    'fameLevel' => 0,
-    'fameTitle' => 'Novice',
-    'hitpointsMax' => 10,
-    'hitpoints' => 10,
-    'stamina' => 100,
-    'staminaMax' => 100,
-    'initiative' => 3,
-    'chanceToHit' => 7,
-    'chanceToCrit' => 10,
-    'evasion' => 3,
-    'absorb' => 0,
+    'general' => [
+        'name' => 'Hero',
+        'gender' => 'Unknown',
+        'avatar' => 0,
+        'level' => 1,
+        'fame' => 0,
+        'fameLevel' => 0,
+        'fameTitle' => 'Novice',
+        'experience' => 0,
+        'gold' => 0,
+    ],
+    'resource' => [
+        'hitpointsMax' => 10,
+        'hitpoints' => 10,
+        'stamina' => 100,
+        'staminaMax' => 100,
+    ],
+    'combat' => [
+        'initiative' => 3,
+        'chanceToHit' => 7,
+        'chanceToCrit' => 10,
+        'evasion' => 3,
+        'absorb' => 0,
+    ],
     'weapon' => [
         'name' => 'Wooden Sword',
         'damage' => 2,
@@ -28,11 +36,9 @@ $player = [
         'evasion' => 0,
         'absorb' => 0
     ],
-    'experience' => 0,
-    'gold' => 0,
-];
+    'inventory' => [],
 
-$playerInventory = [];
+];
 
 $combatLog = [];
 

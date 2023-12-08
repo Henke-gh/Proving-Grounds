@@ -12,9 +12,9 @@ checkRegenerationTime();
         <?php endforeach; ?>
     </div>
     <div class="playerShopInfo">
-        <h3><?= $_SESSION['hero']['name']; ?></h3>
-        <p>Current gold: <?= $_SESSION['hero']['gold']; ?></p>
-        <p>Current HP: <?= $_SESSION['hero']['hitpoints'] . "/" . $_SESSION['hero']['hitpointsMax']; ?></p>
+        <h3><?= $_SESSION['hero']['general']['name']; ?></h3>
+        <p>Current gold: <?= $_SESSION['hero']['general']['gold']; ?></p>
+        <p>Current HP: <?= $_SESSION['hero']['resource']['hitpoints'] . "/" . $_SESSION['hero']['resource']['hitpointsMax']; ?></p>
     </div>
     <div class="shopContainer">
         <div class="shopItems">

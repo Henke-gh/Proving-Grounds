@@ -29,9 +29,9 @@ checkRegenerationTime();
             <p>Working for Borkhorst will gain you some gold, at the cost of Grit.</p>
         </article>
         <div class="playerShopInfo">
-            <h3><?= $_SESSION['hero']['name']; ?></h3>
-            <p>Gold: <?= $_SESSION['hero']['gold']; ?></p>
-            <p>Grit: <?= $_SESSION['hero']['stamina'] . "/" . $_SESSION['hero']['staminaMax']; ?></p>
+            <h3><?= $_SESSION['hero']['general']['name']; ?></h3>
+            <p>Gold: <?= $_SESSION['hero']['general']['gold']; ?></p>
+            <p>Grit: <?= $_SESSION['hero']['resource']['stamina'] . "/" . $_SESSION['hero']['resource']['staminaMax']; ?></p>
         </div>
         <div class="tavernBarWork">
             <p>Spend 35 Grit to earn 15 gold?</p>
