@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . "/functions/startSession.php";
-require_once __DIR__ . "/nav/header.html";
+require_once __DIR__ . "/../functions/startSession.php";
+require_once __DIR__ . "/../nav/header.html";
 checkRegenerationTime();
 ?>
 
@@ -13,7 +13,7 @@ checkRegenerationTime();
             </div>
         <?php endif;
         unset($_SESSION['barComplete']) ?>
-        <img src="/assets/images/tavernkeeper.png">
+        <img src="/../assets/images/tavernkeeper.png">
         <article>
             <p>The place has seen better days, most places have. Most places
                 probably don't even come close to this level of misery.</p>
@@ -35,13 +35,13 @@ checkRegenerationTime();
         </div>
         <div class="tavernBarWork">
             <p>Spend 35 Grit to earn 15 gold?</p>
-            <form method="post" action="/functions/tavernWork.php">
+            <form method="post" action="/../functions/tavernWork.php">
                 <button type="submit" name="barWork">Take a shift</button>
             </form>
-            <a href="/myHero.php"><button type="submit" name="back">Back</button></a>
+            <a href="/app/myHero.php"><button type="submit" name="back">Back</button></a>
         </div>
     </div>
 </main>
 
 <?php
-require_once __DIR__ . "/nav/footer.html";
+require_once __DIR__ . "/../nav/footer.html";

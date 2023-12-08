@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . "/functions/startSession.php";
-require_once __DIR__ . "/nav/header.html";
+require_once __DIR__ . "/../functions/startSession.php";
+require_once __DIR__ . "/../nav/header.html";
 checkRegenerationTime();
 ?>
 
@@ -24,7 +24,7 @@ checkRegenerationTime();
                     <div class="shopGridBox">
                         <?php foreach ($items as $item) : ?>
                             <div class="shopGridItem">
-                                <form method="post" action="/functions/shopCheckout.php">
+                                <form method="post" action="/../functions/shopCheckout.php">
                                     <ul class="items">
                                         <li class="item">
                                             <input type="hidden" name="itemDetails[]" value="<?= htmlentities(json_encode($itemArray = [$category => $item])); ?>">
@@ -48,18 +48,18 @@ checkRegenerationTime();
         </div>
         <div class="vendorBackContainer shopBox">
             <div class="vendorImg">
-                <img src="/assets/images/goblin_vendor02.png">
+                <img src="/../assets/images/goblin_vendor02.png">
                 <?php if (isset($_SESSION['message'])) : ?>
                     <p><?= $_SESSION['message']; ?></p>
                 <?php else : ?>
                     <p>My selection is quite unrivaled!..</p>
                 <?php endif;
                 unset($_SESSION['message']); ?>
-                <a href="/myHero.php"><button type="submit" name="back">Back</button></a>
+                <a href="/app/myHero.php"><button type="submit" name="back">Back</button></a>
             </div>
         </div>
     </div>
 </main>
 
 <?php
-require_once __DIR__ . "/nav/footer.html";
+require_once __DIR__ . "/../nav/footer.html";

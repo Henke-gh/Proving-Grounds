@@ -39,5 +39,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['buyItem'])) {
         }
     }
 }
-header('Location: /../shop.php');
+header('Location: /../app/shop.php');
 exit();

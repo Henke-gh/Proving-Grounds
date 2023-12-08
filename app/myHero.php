@@ -1,18 +1,18 @@
 <?php
-require_once __DIR__ . "/functions/startSession.php";
+require_once __DIR__ . "/../functions/startSession.php";
 if (isset($_SESSION['hero'])) {
     checkRegenerationTime();
     heroDeath();
     levelUp();
 }
-require_once __DIR__ . "/nav/header.html";
+require_once __DIR__ . "/../nav/header.html";
 ?>
 
 <main>
     <nav class="gameNav">
-        <a href="/combat.php"><button type="submit" name="doCombat">Enter the Arena</button></a>
-        <a href="/shop.php"> <button type="submit" name="visitShop">Visit Emporium</button></a>
-        <a href="/tavern.php"> <button type="submit" name="visitShop">Tavern</button></a>
+        <a href="/app/combat.php"><button type="submit" name="doCombat">Enter the Arena</button></a>
+        <a href="/app/shop.php"> <button type="submit" name="visitShop">Visit Emporium</button></a>
+        <a href="/app/tavern.php"> <button type="submit" name="visitShop">Tavern</button></a>
     </nav>
     <?php if (isset($_SESSION['levelUpMsg'])) : ?>
         <div class="levelUpBox">
@@ -67,4 +67,4 @@ require_once __DIR__ . "/nav/header.html";
 </main>
 
 <?php
-require_once __DIR__ . "/nav/footer.html";
+require_once __DIR__ . "/../nav/footer.html";

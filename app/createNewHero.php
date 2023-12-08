@@ -1,14 +1,14 @@
 <?php
-require_once __DIR__ . "/functions/startSession.php";
+require_once __DIR__ . "/../functions/startSession.php";
 if (isset($_SESSION['hero'])) {
     header('Location: myHero.php');
 }
-require_once __DIR__ . "/nav/header.html";
+require_once __DIR__ . "/../nav/header.html";
 ?>
 <main>
     <div class="characterCreateWrap">
         <?php if (!isset($_SESSION['hero'])) : ?>
-            <form class="characterCreate" method="post" action="/functions/initialiseHero.php">
+            <form class="characterCreate" method="post" action="/../functions/initialiseHero.php">
                 <h2>Create your champion</h2>
                 <label id="heroName">Name your hero:</label>
                 <input class="heroNameInput" id="heroName" type="text" required name="heroName">
@@ -47,4 +47,4 @@ require_once __DIR__ . "/nav/header.html";
     </div>
 </main>
 <?php
-require_once __DIR__ . "/nav/footer.html";
+require_once __DIR__ . "/../nav/footer.html";

@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . "/functions/startSession.php";
-require_once __DIR__ . "/nav/header.html";
+require_once __DIR__ . "/../functions/startSession.php";
+require_once __DIR__ . "/../nav/header.html";
 
 checkRegenerationTime();
 if (isset($_POST['monster'], $_POST['retreatValue'])) {
@@ -15,7 +15,7 @@ if (isset($_POST['monster'], $_POST['retreatValue'])) {
 ?>
 
 <main>
-    <img src="/assets/images/crossing_swords.png">
+    <img src="/../assets/images/crossing_swords.png">
     <h3>Monster Duel</h3>
     <?php if (isset($_SESSION['staminaDepleted'])) : ?>
         <div class="monsterSelect">
@@ -51,7 +51,7 @@ if (isset($_POST['monster'], $_POST['retreatValue'])) {
                 </select>
                 <button type="submit">Do battle!</button>
             </form>
-            <form action="index.php">
+            <form action="/../app/myHero.php">
                 <button type="submit">Back</button>
             </form>
         </div>
@@ -61,7 +61,7 @@ if (isset($_POST['monster'], $_POST['retreatValue'])) {
             <?php foreach ($combatLog as $line) : ?>
                 <p class="combatText"><?= $line; ?></p>
             <?php endforeach; ?>
-            <form method="post" action="index.php">
+            <form method="post" action="/../app/myHero.php">
                 <button type="submit" name="afterCombat">Continue</button>
             </form>
         </div>
@@ -70,5 +70,5 @@ if (isset($_POST['monster'], $_POST['retreatValue'])) {
 </main>
 
 <?php
-require_once __DIR__ . "/nav/footer.html";
+require_once __DIR__ . "/../nav/footer.html";
 ?>

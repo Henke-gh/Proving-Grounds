@@ -16,5 +16,5 @@ if (isset($_POST['createChar'])) {
     $_SESSION['hero']['weapon'] = $startingWeapons[$weaponIndex];
     addWeaponBonuses();
 
-    header('Location: /../myHero.php');
+    header('Location: /../app/myHero.php');
 }

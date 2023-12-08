@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . "/functions/startSession.php";
 if (isset($_SESSION['hero'])) {
-    header('Location: myHero.php');
+    header('Location: /app/myHero.php');
 }
 require_once __DIR__ . "/nav/header.html";
 ?>
