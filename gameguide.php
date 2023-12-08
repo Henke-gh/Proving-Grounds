@@ -17,7 +17,7 @@ checkRegenerationTime();
             <h3>Grit</h3>
             <p>Grit is the new stamina. It depletes during actions taken, such as combat.
                 It regenerates naturally over time after a few minutes, reload a page or switch between pages
-                if it hasn't in some time. At zero or negative Grit
+                if it hasn't in some time. At zero Grit
                 your Hero can't fight, clean the bar or perform other (coming soon™) demanding tasks.</p>
             <h3>Fame</h3>
             <p>It's a measure of your renown, glory and splendour! As it increases your

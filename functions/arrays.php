@@ -89,7 +89,7 @@ $vendorItems = [
             'name' => 'Twin Daggers',
             'damage' => 5,
             'evasion' => 4,
-            'initiative' => 4,
+            'initiative' => 2,
             'cost' => 300,
         ],
         [
@@ -100,7 +100,7 @@ $vendorItems = [
         ],
         [
             'name' => 'Bastard Sword',
-            'damage' => 10,
+            'damage' => 12,
             'initiative' => 5,
             'cost' => 1200,
         ],
@@ -270,8 +270,8 @@ $monsterTypes = [
         'level' => 15,
         'hitpoints' => 85,
         'initiative' => 10,
-        'chanceToHit' => 15,
-        'chanceToCrit' => 20,
+        'chanceToHit' => 20,
+        'chanceToCrit' => 15,
         'evasion' => 5,
         'weapon' => [
             'name' => 'Slithering Tentacle',
