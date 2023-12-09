@@ -51,4 +51,4 @@ if (isset($_SESSION['hero']) && $_SESSION['hero']['resource']['hitpoints'] > 0) 
 </main>
 
 <?php
-require_once __DIR__ . "/../nav/footer.html";
+require_once __DIR__ . "/../nav/footer.php";

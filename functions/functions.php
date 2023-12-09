@@ -347,7 +347,7 @@ function applyTrinketItemEffects()
         if ($category === "trinkets" && isset($item['evasion'])) {
             $evasionIncrease = $item['evasion'];
 
-            if (isset($_SESSION['hero']['evasion'])) {
+            if (isset($_SESSION['hero']['combat']['evasion'])) {
                 $_SESSION['hero']['combat']['evasion'] += $evasionIncrease;
                 array_push($_SESSION['hero']['inventory'], $item['name']);
             } /* else {

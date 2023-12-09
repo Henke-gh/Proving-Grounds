@@ -76,4 +76,4 @@ require_once __DIR__ . "/../nav/header.html";
 </main>
 
 <?php
-require_once __DIR__ . "/../nav/footer.html";
+require_once __DIR__ . "/../nav/footer.php";

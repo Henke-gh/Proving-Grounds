@@ -76,5 +76,5 @@ if (isset($_POST['monster'], $_POST['retreatValue'])) {
 </main>
 
 <?php
-require_once __DIR__ . "/../nav/footer.html";
+require_once __DIR__ . "/../nav/footer.php";
 ?>
